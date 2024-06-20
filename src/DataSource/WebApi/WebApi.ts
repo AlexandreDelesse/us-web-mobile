@@ -4,6 +4,7 @@ import { TimeRoute } from "./Routes/TimeRoute";
 import { JobEditValueRoute } from "./Routes/JobEditValueRoute";
 import { LoginRoute } from "./Routes/LoginRoute";
 import { KilometersRoute } from "./Routes/KilometersRoute";
+import { SignatureRoute } from "./Routes/SignatureRoute";
 
 export class WebApi {
   private baseApi: AxiosInstance = axios.create({
@@ -16,4 +17,5 @@ export class WebApi {
   time = new TimeRoute(this.baseApi);
   jobEditValue = new JobEditValueRoute(this.baseApi);
   kilometers = new KilometersRoute(this.baseApi);
+  signature = new SignatureRoute(this.baseApi);
 }

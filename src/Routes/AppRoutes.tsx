@@ -2,6 +2,7 @@ import {
   Navigate,
   Outlet,
   createBrowserRouter,
+  createHashRouter,
   useLocation,
   useNavigate,
 } from "react-router-dom";
@@ -18,6 +19,7 @@ import MainNavbarFacade from "../Presenter/components/MainNavbar/MainNavbarFacad
 import { Box } from "@mui/material";
 import CrewList from "../Presenter/page/CrewList/CrewList";
 import KilometersSetForm from "../Presenter/page/KilometersSetForm/KilometersSetForm";
+import { basename } from "path";
 
 const PrivateRoute = () => {
   const navigate = useNavigate();
@@ -39,7 +41,7 @@ const PrivateRoute = () => {
   );
 };
 
-export const appRouter = createBrowserRouter([
+export const appRouter = createHashRouter([
   {
     path: "/",
     element: <PrivateRoute />,
@@ -56,6 +58,7 @@ export const appRouter = createBrowserRouter([
         ],
       },
       { path: "login", element: <UserLoginView /> },
+      { path: "login/:crewId/:memberName", element: <UserLoginView /> },
       { path: "kilometers", element: <KilometersSetForm /> },
       { path: "regul", element: <CrewList /> },
     ],

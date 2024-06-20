@@ -1,4 +1,4 @@
-import { useMutation, useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useEffect, useState } from "react";
 import { FieldInfos } from "../../../../Domain/FormStructure";
 import GetFormStructureUseCase from "../../../../UseCase/GetFormStructureUseCase/GetFormStructureUseCase";
@@ -6,28 +6,30 @@ import JobEditUseCase from "../../../../UseCase/JobEditUseCase/JobEditUseCase";
 
 export default function JobEditViewModel() {
   const useCase = GetFormStructureUseCase();
+  const queryClient = useQueryClient();
   // const updateJobEditValueUseCase = UpdateJobEditValueUseCase();
   // const { id } = useParams();
 
   const editUseCase = JobEditUseCase();
   const [fields, setFields] = useState<FieldInfos[]>([]);
 
-  const { data, isLoading, error } = useQuery({
+  const { data, isLoading, error, isRefetching } = useQuery({
     queryKey: ["formStructure"],
     queryFn: useCase.execute,
   });
 
   const { isPending, mutate } = useMutation({
     mutationFn: editUseCase.patchJobEdit,
+    onSuccess: () =>
+      queryClient.invalidateQueries({ queryKey: ["formStructure"] }),
   });
 
   useEffect(() => {
     setFields(data || []);
-  }, [data]);
+  }, [data, isRefetching]);
 
   const onSave = () => {
     const values = fields.map((el) => ({ name: el.name, value: el.value }));
-    console.log(values);
     mutate(values);
   };
 
@@ -44,6 +46,7 @@ export default function JobEditViewModel() {
     fields,
     data,
     isLoading,
+    isRefetching,
     error,
     onSave,
     onValueChanges,

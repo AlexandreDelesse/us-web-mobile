@@ -15,7 +15,7 @@ export default function TextFieldInput(props: InputProps) {
       label={label}
       onChange={handleOnValueChanges}
       name={name}
-      value={value}
+      value={value || ""}
     />
   );
 }

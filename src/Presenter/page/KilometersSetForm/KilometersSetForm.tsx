@@ -1,4 +1,10 @@
-import { Button, Card, CardContent, Typography } from "@mui/material";
+import {
+  Button,
+  Card,
+  CardContent,
+  CardHeader,
+  Typography,
+} from "@mui/material";
 import React, { useContext, useState } from "react";
 import OutlinedTextField from "../../components/OutlinedTextField/OutlinedTextField";
 import ErrorHandler from "../../components/ErrorHandler/ErrorHandler";
@@ -38,10 +44,15 @@ export default function KilometersSetForm() {
       }}
       elevation={0}
     >
+      <CardHeader
+        title={
+          <Typography variant="h4" textAlign="center">
+            Kilometrage véhicule
+          </Typography>
+        }
+      />
       <CardContent>
-        <Typography variant="h4" textAlign="center">
-          Kilometres du vehicule
-        </Typography>
+        <Typography variant="caption">Derniere saisie</Typography>
         <Kilometers />
         <OutlinedTextField
           label={"Km"}
@@ -58,6 +69,9 @@ export default function KilometersSetForm() {
           disabled={isPending}
         >
           Valider
+        </Button>
+        <Button color="secondary" onClick={() => navigate("/")}>
+          Skip
         </Button>
 
         <ErrorHandler error={error} />

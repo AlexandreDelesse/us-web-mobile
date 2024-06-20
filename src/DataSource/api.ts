@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 import { LoginCmd } from "../UseCase/LoginUseCase/LoginCmd";
 import { Crew } from "../Domain/Crew";
 import { AckJobCmd } from "../UseCase/AckJobUseCase/AckJobCmd";

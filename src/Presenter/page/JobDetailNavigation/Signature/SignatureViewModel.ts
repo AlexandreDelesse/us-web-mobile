@@ -6,6 +6,7 @@ import ReactSignatureCanvas from "react-signature-canvas";
 import GetSignatureUseCase from "../../../../UseCase/GetSignatureUseCase/GetSignatureUseCase";
 import UpdateSignatureUseCase from "../../../../UseCase/UpdateSignatureUseCase/UpdateSignatureUseCase";
 import { Signature } from "../../../../Domain/Signature";
+import { SignatureCmd } from "../../../../DataSource/WebApi/Routes/SignatureRoute";
 
 export default function SignatureViewModel() {
   const getSignatureUseCase = GetSignatureUseCase();
@@ -35,8 +36,8 @@ export default function SignatureViewModel() {
   });
 
   const { mutate } = useMutation({
-    mutationFn: (signature: Signature) =>
-      updateSignatureUseCase.execute(signature),
+    mutationFn: (signCmd: SignatureCmd) =>
+      updateSignatureUseCase.execute(signCmd),
   });
 
   useEffect(() => {
@@ -50,7 +51,7 @@ export default function SignatureViewModel() {
     const imgDataUrl = generateImageDataUrl();
     const now = new Date();
     const isoDate = now.toISOString();
-    mutate({ data: imgDataUrl, dateTime: isoDate });
+    mutate({ jobId: id, signature: { data: imgDataUrl, dateTime: isoDate } });
   };
 
   const generateImageDataUrl = () => {

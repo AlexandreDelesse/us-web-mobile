@@ -1,10 +1,12 @@
 import { useState } from "react";
 import LoginUseCase from "../../../UseCase/LoginUseCase/LoginUseCase";
 import { useMutation } from "@tanstack/react-query";
+import { useParams } from "react-router-dom";
 
 export default function UserLoginViewModel() {
-  const [code, setCode] = useState("206702");
-  const [name, setName] = useState("heraud");
+  const { crewId, memberName } = useParams();
+  const [code, setCode] = useState(crewId || "");
+  const [name, setName] = useState(memberName || "");
 
   const loginUseCase = LoginUseCase();
 

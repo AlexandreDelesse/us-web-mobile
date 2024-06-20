@@ -22,7 +22,6 @@ export default function JobEditUseCase() {
         attributName: el.name,
         attributValue: el.value,
       }));
-      console.log(editValues);
       const patchResponse = await webApi.jobEditValue.patch(id, editValues);
       return patchResponse;
     } catch (error) {

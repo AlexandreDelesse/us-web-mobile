@@ -5,10 +5,17 @@ import { FieldInfos } from "../../../../Domain/FormStructure";
 import ErrorHandler from "../../../components/ErrorHandler/ErrorHandler";
 
 export default function JobEdit() {
-  const { fields, onSave, error, isLoading, onValueChanges, data } =
-    JobEditViewModel();
+  const {
+    fields,
+    onSave,
+    error,
+    isLoading,
+    isRefetching,
+    onValueChanges,
+    data,
+  } = JobEditViewModel();
 
-  if (isLoading) return <div>Loading</div>;
+  if (isLoading || isRefetching) return <div>Loading</div>;
 
   if (!data) return <div>No data yet</div>;
 

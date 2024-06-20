@@ -1,10 +1,12 @@
-import { apiPutSignature } from "../../DataSource/api";
+import { SignatureCmd } from "../../DataSource/WebApi/Routes/SignatureRoute";
+import { apiPutSignature, webApi } from "../../DataSource/api";
+import { getCrew } from "../../DataSource/localStorage";
 import { Signature } from "../../Domain/Signature";
 
 export default function UpdateSignatureUseCase() {
-  const execute = async (signature: Signature) => {
+  const execute = async (signature: SignatureCmd) => {
     try {
-      apiPutSignature(signature);
+      webApi.signature.put(signature);
     } catch (error) {
       throw error;
     }

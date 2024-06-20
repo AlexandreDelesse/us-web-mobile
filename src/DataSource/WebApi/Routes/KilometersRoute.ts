@@ -2,7 +2,6 @@ import axios, { AxiosInstance } from "axios";
 import { DriverSwapQuery } from "../../../Domain/Queries/DriverSwapQuery";
 
 interface km {
-  hasKm: boolean;
   km: number;
 }
 

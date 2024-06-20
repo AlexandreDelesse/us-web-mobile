@@ -14,7 +14,7 @@ export default function Kilometers() {
   });
   return (
     <div>
-      {data?.hasKm && <Typography>{data.km || "No data"}</Typography>}
+      {data && <Typography>{data.km || "No data"}</Typography>}
       <ErrorHandler error={error} />
     </div>
   );

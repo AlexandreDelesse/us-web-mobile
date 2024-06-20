@@ -50,7 +50,6 @@ export default function StepProgressViewModel() {
     const firstTimestampNull = stepsMapped.find(
       (step) => step.timestamp === null
     );
-    console.log("first : ", firstTimestampNull);
 
     setActiveStep(firstTimestampNull || null);
   }, [data]);
