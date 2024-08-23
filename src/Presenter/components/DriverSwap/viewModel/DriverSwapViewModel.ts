@@ -47,6 +47,7 @@ export default function DriverSwapViewModel() {
       .indexOf(selectedDriver.driverId);
 
     const nextDriver = getNextDriver(currentDriverIndex);
+    console.log(nextDriver)
     if (!nextDriver) return;
     else mutate(nextDriver.driverId);
   };

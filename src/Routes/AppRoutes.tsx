@@ -1,7 +1,6 @@
 import {
   Navigate,
   Outlet,
-  createBrowserRouter,
   createHashRouter,
   useLocation,
   useNavigate,
