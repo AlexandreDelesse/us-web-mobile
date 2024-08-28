@@ -8,7 +8,7 @@ import { AlertHeading } from "react-bootstrap";
 export default function JobEdit() {
   const {
     fields,
-    onSave,
+    handleOnSave,
     error,
     isLoading,
     isRefetching,
@@ -34,7 +34,7 @@ export default function JobEdit() {
           type={field.type}
         />
       ))}
-      <Button onClick={onSave}>Sauvegarder</Button>
+      <Button onClick={handleOnSave}>Sauvegarder</Button>
 
       <Alert sx={{ marginTop: 4 }} severity="info">
         <AlertHeading>Pas de panique tout va bien</AlertHeading>

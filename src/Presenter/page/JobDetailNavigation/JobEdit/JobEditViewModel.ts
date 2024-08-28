@@ -28,18 +28,23 @@ export default function JobEditViewModel() {
     setFields(data || []);
   }, [data, isRefetching]);
 
-  const onSave = () => {
+  const handleOnSave = () => {
     const values = fields.map((el) => ({ name: el.name, value: el.value }));
+    save(values);
+  };
+
+  const save = (values: { name: string; value: string }[]) => {
     mutate(values);
   };
 
   const onValueChanges = (name: string, value: string) => {
-    setFields((old) =>
-      old.map((el) => (el.name === name ? { ...el, value } : { ...el }))
+    let newFields = fields.map((el) =>
+      el.name === name ? { ...el, value } : { ...el }
     );
-    const field = fields.find(field => field.name === name)
-    if(field && field.instantUpdate)
-      onSave()
+    let field = fields.find((field) => field.name === name);
+    if (field && field.instantUpdate)
+      save(newFields.map((el) => ({ name: el.name, value: el.value })));
+    else setFields(newFields);
   };
 
   const getValue = (name: string) =>
@@ -51,7 +56,7 @@ export default function JobEditViewModel() {
     isLoading,
     isRefetching,
     error,
-    onSave,
+    handleOnSave,
     onValueChanges,
     getValue,
   };
