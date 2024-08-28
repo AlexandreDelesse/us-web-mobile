@@ -19,7 +19,7 @@ export default function DatePicker(props: InputProps) {
 
   return (
     <OutlinedTextField
-      label={label}
+      label={label || "label"}
       type="date"
       name={name}
       onChange={updateDate}

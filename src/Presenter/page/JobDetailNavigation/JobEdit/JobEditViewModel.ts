@@ -12,6 +12,7 @@ export default function JobEditViewModel() {
 
   const editUseCase = JobEditUseCase();
   const [fields, setFields] = useState<FieldInfos[]>([]);
+  const [contractType, setContractType] = useState("")
 
   const { data, isLoading, error, isRefetching } = useQuery({
     queryKey: ["formStructure"],

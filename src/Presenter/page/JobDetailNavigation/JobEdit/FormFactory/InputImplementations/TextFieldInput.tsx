@@ -12,7 +12,7 @@ export default function TextFieldInput(props: InputProps) {
 
   return (
     <OutlinedTextField
-      label={label}
+      label={label || "label"}
       onChange={handleOnValueChanges}
       name={name}
       value={value || ""}

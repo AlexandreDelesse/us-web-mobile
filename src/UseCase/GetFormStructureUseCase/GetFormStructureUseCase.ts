@@ -14,6 +14,7 @@ export default function GetFormStructureUseCase() {
   const execute = async (): Promise<FieldInfos[]> => {
     try {
       if (!id) throw new Error("Aucun id");
+
       const formStructure = await apiGetFormStructure(id);
       const jobEditValues = await webApi.jobEditValue.get(id);
       return formStructure.map((el) => ({

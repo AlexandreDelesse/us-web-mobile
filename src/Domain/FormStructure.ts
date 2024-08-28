@@ -1,6 +1,6 @@
 export interface FormStructure {
   name: string;
-  label: string;
+  label: string | null;
   type: string;
   options: any;
 }
