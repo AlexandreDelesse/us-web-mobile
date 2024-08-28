@@ -3,6 +3,7 @@ export interface FormStructure {
   label: string | null;
   type: string;
   options: any;
+  instantUpdate: boolean
 }
 
 export interface FieldInfos extends FormStructure {

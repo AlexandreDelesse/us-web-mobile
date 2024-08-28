@@ -12,11 +12,10 @@ export default function JobEditViewModel() {
 
   const editUseCase = JobEditUseCase();
   const [fields, setFields] = useState<FieldInfos[]>([]);
-  const [contractType, setContractType] = useState("")
 
   const { data, isLoading, error, isRefetching } = useQuery({
     queryKey: ["formStructure"],
-    queryFn: useCase.execute,
+    queryFn: () => useCase.execute(),
   });
 
   const { isPending, mutate } = useMutation({
@@ -38,6 +37,9 @@ export default function JobEditViewModel() {
     setFields((old) =>
       old.map((el) => (el.name === name ? { ...el, value } : { ...el }))
     );
+    const field = fields.find(field => field.name === name)
+    if(field && field.instantUpdate)
+      onSave()
   };
 
   const getValue = (name: string) =>
