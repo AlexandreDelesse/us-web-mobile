@@ -1,7 +1,7 @@
 {
   "name": "urgence-sante-jobs-client",
   "homepage": "http://alex.delesse.net/dev",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "private": true,
   "dependencies": {
     "@emotion/react": "^11.11.4",
