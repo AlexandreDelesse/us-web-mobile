@@ -59,5 +59,6 @@ export default function JobEditViewModel() {
     handleOnSave,
     onValueChanges,
     getValue,
+    isPending
   };
 }

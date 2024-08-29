@@ -14,6 +14,7 @@ export default function JobEdit() {
     isRefetching,
     onValueChanges,
     data,
+    isPending
   } = JobEditViewModel();
 
   if (isLoading || isRefetching) return <div>Loading</div>;
@@ -34,7 +35,7 @@ export default function JobEdit() {
           type={field.type}
         />
       ))}
-      <Button onClick={handleOnSave}>Sauvegarder</Button>
+      <Button disabled={isPending} onClick={handleOnSave}>Sauvegarder</Button>
 
       <Alert sx={{ marginTop: 4 }} severity="info">
         <AlertHeading>Pas de panique tout va bien</AlertHeading>
