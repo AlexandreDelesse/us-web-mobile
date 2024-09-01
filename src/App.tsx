@@ -13,19 +13,24 @@ import { RouterProvider } from "react-router-dom";
 import { appRouter } from "./Routes/AppRoutes";
 import FilterContext from "./Contexts/FilterContext";
 import MainNavbarFacade from "./Presenter/components/MainNavbar/MainNavbarFacade";
+import { FieldInfos } from "./Domain/FormStructure";
+import JobEditFormContext from "./Contexts/JobEditFormContext";
 
 const queryClient = new QueryClient();
 
 function App() {
   const [shouldShowJobTerminated, toggleShowJobterminated] = useState(false);
+  const [fields, setFields] = useState<FieldInfos[]>([]);
 
   return (
     <QueryClientProvider client={queryClient}>
-      <FilterContext.Provider
-        value={{ shouldShowJobTerminated, toggleShowJobterminated }}
-      >
-        <RouterProvider router={appRouter} />
-      </FilterContext.Provider>
+      <JobEditFormContext.Provider value={{ fields, setFields }}>
+        <FilterContext.Provider
+          value={{ shouldShowJobTerminated, toggleShowJobterminated }}
+        >
+          <RouterProvider router={appRouter} />
+        </FilterContext.Provider>
+      </JobEditFormContext.Provider>
     </QueryClientProvider>
   );
 }

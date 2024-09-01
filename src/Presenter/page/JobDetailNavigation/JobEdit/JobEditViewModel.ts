@@ -1,8 +1,8 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { useEffect, useState } from "react";
-import { FieldInfos } from "../../../../Domain/FormStructure";
+import { useContext, useEffect } from "react";
 import GetFormStructureUseCase from "../../../../UseCase/GetFormStructureUseCase/GetFormStructureUseCase";
 import JobEditUseCase from "../../../../UseCase/JobEditUseCase/JobEditUseCase";
+import JobEditFormContext from "../../../../Contexts/JobEditFormContext";
 
 export default function JobEditViewModel() {
   const useCase = GetFormStructureUseCase();
@@ -11,7 +11,8 @@ export default function JobEditViewModel() {
   // const { id } = useParams();
 
   const editUseCase = JobEditUseCase();
-  const [fields, setFields] = useState<FieldInfos[]>([]);
+  const { fields, setFields } = useContext(JobEditFormContext);
+  // const [fields, setFields] = useState<FieldInfos[]>([]);
 
   const { data, isLoading, error, isRefetching } = useQuery({
     queryKey: ["formStructure"],
@@ -59,6 +60,6 @@ export default function JobEditViewModel() {
     handleOnSave,
     onValueChanges,
     getValue,
-    isPending
+    isPending,
   };
 }

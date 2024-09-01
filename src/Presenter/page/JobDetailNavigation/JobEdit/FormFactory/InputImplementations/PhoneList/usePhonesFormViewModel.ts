@@ -41,7 +41,7 @@ export default function usePhonesFormViewModel(props: InputProps) {
         index,
         msg: "Renseignez ou supprimez l'email",
       }))
-      .filter((el) => el.value == "");
+      .filter((el) => el.value === "");
     setPhoneErrors(emptyPhoneErrors);
     setValue(name, JSON.stringify(phones));
   }, [phones]);

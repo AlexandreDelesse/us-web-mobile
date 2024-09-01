@@ -1,15 +1,9 @@
-import React, { ReactNode } from "react";
-import { useParams } from "react-router-dom";
+import { ReactNode } from "react";
 import JobDetailViewModel from "./JobDetailViewModel";
-import PatientDisplayName from "./Views/PatientDisplayName";
 import { Box, Card, CardContent, Typography } from "@mui/material";
 import FromTo from "../../../components/Utils/FromTo/FromTo";
-import StepProgress from "./StepProgress/StepProgress";
-import StepProgressDecorator from "./StepProgress/StepProgressDecorator";
 import EditableBeneficiary from "./Views/EditableBeneficiary";
-import TransportMode from "../../../components/Utils/TransportMode/TransportMode";
 import StepProgressView from "./StepProgress/StepProgressView";
-import { Modal } from "react-bootstrap";
 
 export default function JobDetail() {
   const { jobDetail, isLoading, error } = JobDetailViewModel();
@@ -22,6 +16,9 @@ export default function JobDetail() {
   return (
     <Box>
       <EditableBeneficiary beneficiary={jobDetail.beneficiary} />
+      <Typography variant="body1">
+        Né le {jobDetail.beneficiary.ddn} - {jobDetail.beneficiary.age}
+      </Typography>
 
       <Card elevation={0} sx={{ marginY: 1 }}>
         <CardContent>
@@ -32,7 +29,7 @@ export default function JobDetail() {
 
           <CustomTypography
             title="Transport"
-            content={<TransportMode mode={parseInt(jobDetail.transportMode)} />} //TODO: Remove parseint and act with numbers
+            content={jobDetail.transportMode} //TODO: Remove parseint and act with numbers
           />
         </CardContent>
       </Card>

@@ -5,7 +5,6 @@ import { useParams } from "react-router-dom";
 import ReactSignatureCanvas from "react-signature-canvas";
 import GetSignatureUseCase from "../../../../UseCase/GetSignatureUseCase/GetSignatureUseCase";
 import UpdateSignatureUseCase from "../../../../UseCase/UpdateSignatureUseCase/UpdateSignatureUseCase";
-import { Signature } from "../../../../Domain/Signature";
 import { SignatureCmd } from "../../../../DataSource/WebApi/Routes/SignatureRoute";
 
 export default function SignatureViewModel() {

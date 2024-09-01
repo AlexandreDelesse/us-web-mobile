@@ -9,7 +9,7 @@ import {
 } from "@mui/material";
 
 export default function SelectInput(props: InputProps) {
-  const { name, setValue, value, options } = props;
+  const { name, setValue, value, options, label } = props;
 
   const onSelectChanges = (e: SelectChangeEvent<any>) => {
     setValue(name, e.target.value);
@@ -22,7 +22,7 @@ export default function SelectInput(props: InputProps) {
 
   return (
     <FormControl size="small" sx={{ width: "100%", my: 1 }}>
-      <InputLabel>Type de contrat</InputLabel>
+      <InputLabel>{label}</InputLabel>
       <Select
         onChange={onSelectChanges}
         value={value || -1}

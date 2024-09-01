@@ -18,7 +18,6 @@ import MainNavbarFacade from "../Presenter/components/MainNavbar/MainNavbarFacad
 import { Box } from "@mui/material";
 import CrewList from "../Presenter/page/CrewList/CrewList";
 import KilometersSetForm from "../Presenter/page/KilometersSetForm/KilometersSetForm";
-import { basename } from "path";
 
 const PrivateRoute = () => {
   const navigate = useNavigate();

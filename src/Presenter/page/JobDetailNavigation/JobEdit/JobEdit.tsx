@@ -14,7 +14,7 @@ export default function JobEdit() {
     isRefetching,
     onValueChanges,
     data,
-    isPending
+    isPending,
   } = JobEditViewModel();
 
   if (isLoading || isRefetching) return <div>Loading</div>;
@@ -35,15 +35,9 @@ export default function JobEdit() {
           type={field.type}
         />
       ))}
-      <Button disabled={isPending} onClick={handleOnSave}>Sauvegarder</Button>
-
-      <Alert sx={{ marginTop: 4 }} severity="info">
-        <AlertHeading>Pas de panique tout va bien</AlertHeading>
-        Au changement de type de contrat le formulaire se sauvegarde et se
-        recharge (grace à l'attribut "instantUpdate"). Tant que la persistance
-        ne sera pas mise en place le type de contrat séléctionné est donc remis
-        a zéro.
-      </Alert>
+      <Button disabled={isPending} onClick={handleOnSave}>
+        Sauvegarder
+      </Button>
     </Box>
   );
 }

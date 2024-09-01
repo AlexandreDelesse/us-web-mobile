@@ -1,7 +1,5 @@
 import { SignatureCmd } from "../../DataSource/WebApi/Routes/SignatureRoute";
-import { apiPutSignature, webApi } from "../../DataSource/api";
-import { getCrew } from "../../DataSource/localStorage";
-import { Signature } from "../../Domain/Signature";
+import { webApi } from "../../DataSource/api";
 
 export default function UpdateSignatureUseCase() {
   const execute = async (signature: SignatureCmd) => {

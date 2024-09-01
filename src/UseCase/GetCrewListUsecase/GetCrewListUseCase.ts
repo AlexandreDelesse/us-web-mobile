@@ -1,5 +1,4 @@
-import { apiPutSignature, webApi } from "../../DataSource/api";
-import { Signature } from "../../Domain/Signature";
+import { webApi } from "../../DataSource/api";
 
 export default function GetCrewListUsecase() {
   const execute = async () => {
