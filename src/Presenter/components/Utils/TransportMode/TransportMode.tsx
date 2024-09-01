@@ -5,7 +5,7 @@ interface TransportModeProps {
 export default function TransportMode(props: TransportModeProps) {
   const { mode } = props;
   const transportModes = [
-    { id: 1, name: "Amnulance" },
+    { id: 1, name: "Ambulance" },
     { id: 2, name: "Vsl" },
     { id: 3, name: "Taxi" },
     { id: 4, name: "SNG" },
