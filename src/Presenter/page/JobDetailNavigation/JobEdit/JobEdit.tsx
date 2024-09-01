@@ -25,16 +25,18 @@ export default function JobEdit() {
 
   return (
     <Box>
-      {fields.map((field: FieldInfos) => (
-        <FormFactory
-          key={field.name}
-          componentProps={{
-            ...field,
-            setValue: onValueChanges,
-          }}
-          type={field.type}
-        />
-      ))}
+      {fields
+        .sort((a, b) => a.index - b.index)
+        .map((field: FieldInfos) => (
+          <FormFactory
+            key={field.name}
+            componentProps={{
+              ...field,
+              setValue: onValueChanges,
+            }}
+            type={field.type}
+          />
+        ))}
       <Button disabled={isPending} onClick={handleOnSave}>
         Sauvegarder
       </Button>

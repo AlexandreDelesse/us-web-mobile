@@ -23,11 +23,7 @@ export default function SelectInput(props: InputProps) {
   return (
     <FormControl size="small" sx={{ width: "100%", my: 1 }}>
       <InputLabel>{label}</InputLabel>
-      <Select
-        onChange={onSelectChanges}
-        value={value || -1}
-        label="Type de contrat"
-      >
+      <Select onChange={onSelectChanges} value={value || -1} label={label}>
         <MenuItem value={-1}>Aucune sélection</MenuItem>
         {formattedOptions.map((contractType) => (
           <MenuItem key={contractType.value} value={contractType.value}>

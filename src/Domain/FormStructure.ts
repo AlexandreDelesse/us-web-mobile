@@ -4,6 +4,7 @@ export interface FormStructure {
   type: string;
   options: any;
   instantUpdate: boolean
+  index: number
 }
 
 export interface FieldInfos extends FormStructure {

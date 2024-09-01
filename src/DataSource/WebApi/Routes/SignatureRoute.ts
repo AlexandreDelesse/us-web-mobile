@@ -15,7 +15,6 @@ export class SignatureRoute {
   }
 
   async put(params: SignatureCmd) {
-    console.log(params.jobId)
     const axiosResponse = await this.baseApi.put(
       `/Signature/${params.jobId}`,
       params.signature
