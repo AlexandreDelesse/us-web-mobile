@@ -1,8 +1,17 @@
-import { Button, Card, CardContent, Typography } from "@mui/material";
+import {
+  Box,
+  Button,
+  Card,
+  CardContent,
+  Icon,
+  Typography,
+} from "@mui/material";
 import UserLoginViewModel from "./UserLoginViewModel";
 import OutlinedTextField from "../../components/OutlinedTextField/OutlinedTextField";
 import ErrorHandler from "../../components/ErrorHandler/ErrorHandler";
-
+import LunchDiningTwoToneIcon from "@mui/icons-material/LunchDiningTwoTone";
+import Person2TwoToneIcon from "@mui/icons-material/Person2TwoTone";
+import LocalDrinkTwoToneIcon from "@mui/icons-material/LocalDrinkTwoTone";
 export default function UserLoginView() {
   const { code, name, setCode, setName, submit, isPending, error } =
     UserLoginViewModel();
@@ -44,6 +53,11 @@ export default function UserLoginView() {
         </Button>
 
         <ErrorHandler error={error} />
+
+        <Box sx={{ mt: 4 }}>
+          <LunchDiningTwoToneIcon color="warning" fontSize="large" />
+          <LocalDrinkTwoToneIcon color="error" fontSize="large" />
+        </Box>
       </CardContent>
     </Card>
   );
