@@ -9,6 +9,7 @@ export default function TransportMode(props: TransportModeProps) {
     { id: 2, name: "Vsl" },
     { id: 3, name: "Taxi" },
     { id: 4, name: "SNG" },
+    { id: 6, name: "SNG" },
   ];
 
   const getTransportMode = (id: number) => {
