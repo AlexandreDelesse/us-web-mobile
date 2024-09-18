@@ -1,7 +1,7 @@
 import axios, { AxiosInstance } from "axios";
 import { DriverSwapQuery } from "../../../Domain/Queries/DriverSwapQuery";
 
-interface km {
+interface kmApiGetResponse {
   km: number;
 }
 
@@ -13,7 +13,7 @@ export class KilometersRoute {
     this.baseApi = axiosInstance;
   }
 
-  async get(crewId: number | undefined): Promise<km> {
+  async get(crewId: number | undefined): Promise<kmApiGetResponse> {
     const axiosResponse = await this.baseApi.get(`Kilometers/${crewId}`);
     return axiosResponse.data;
   }
