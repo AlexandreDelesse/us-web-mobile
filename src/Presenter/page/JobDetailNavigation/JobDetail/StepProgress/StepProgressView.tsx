@@ -47,8 +47,6 @@ export default function StepProgressView() {
     p: 4,
   };
 
-  console.log(activeStepIndex);
-
   return (
     <Box sx={{ marginTop: 5 }}>
       <Stepper activeStep={activeStepIndex} alternativeLabel>
