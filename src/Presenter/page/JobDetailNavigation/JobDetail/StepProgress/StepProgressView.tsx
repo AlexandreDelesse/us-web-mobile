@@ -13,6 +13,7 @@ import {
 import StepProgressViewModel from "./StepProgressViewModel";
 import OutlinedTextField from "../../../../components/OutlinedTextField/OutlinedTextField";
 import "./stepProgress.css";
+import ErrorHandler from "../../../../components/ErrorHandler/ErrorHandler";
 
 export default function StepProgressView() {
   const viewModel = StepProgressViewModel();
@@ -33,6 +34,8 @@ export default function StepProgressView() {
     onValidateUpdateStep,
     canReset,
     handleResetStep,
+    fetchError,
+    updateError,
   } = viewModel;
 
   const style = {
@@ -46,6 +49,8 @@ export default function StepProgressView() {
     boxShadow: 24,
     p: 4,
   };
+
+  if (fetchError) return <ErrorHandler error={fetchError} />;
 
   return (
     <Box sx={{ marginTop: 5 }}>

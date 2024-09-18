@@ -23,7 +23,12 @@ export default function StepProgressViewModel() {
   const [tempTimestamp, setTempTimestamp] = useState("");
   const [showModal, setShowModal] = useState(false);
 
-  const { isLoading, data, isError, error } = useQuery({
+  const {
+    isLoading,
+    data,
+    isError,
+    error: fetchError,
+  } = useQuery({
     queryKey: ["time"],
     queryFn: useCase.execute,
   });
@@ -169,5 +174,7 @@ export default function StepProgressViewModel() {
     onValidateUpdateStep,
     handleResetStep,
     canReset,
+    fetchError,
+    updateError,
   };
 }
