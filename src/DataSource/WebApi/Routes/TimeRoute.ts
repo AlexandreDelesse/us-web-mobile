@@ -2,6 +2,12 @@ import { AxiosInstance } from "axios";
 import { JobStatusQuery } from "../../../Domain/Queries/JobStatusQuery";
 import { JobStatusCommand } from "../../../Domain/Commands/JobStatusCommand";
 
+export interface JobStatusGetResponse {
+  available: string | null;
+  go: string | null;
+  onSite: string | null;
+}
+
 export class TimeRoute {
   private baseApi: AxiosInstance;
   private path: string = "Time";
@@ -10,7 +16,7 @@ export class TimeRoute {
     this.baseApi = axiosInstance;
   }
 
-  async get(gJobId: string): Promise<JobStatusQuery> {
+  async get(gJobId: string): Promise<JobStatusGetResponse> {
     const axiosResponse = await this.baseApi.get(`Time/${gJobId}`);
     return axiosResponse.data;
   }

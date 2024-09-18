@@ -1,4 +1,5 @@
 import {
+  Alert,
   Box,
   Button,
   Card,
@@ -46,26 +47,24 @@ export default function StepProgressView() {
     p: 4,
   };
 
+  console.log(activeStepIndex);
+
   return (
-    <div>
-      <Card>
-        <CardContent>
-          <Stepper activeStep={activeStepIndex} alternativeLabel>
-            {steps.map((step, index) => (
-              <Step key={step.index}>
-                <StepButton onClick={() => onStepClick(step)}>
-                  <Typography>
-                    {getStepDisplayLabel(step.label) || `Etape ${step.index}`}
-                  </Typography>
-                  <Typography variant="caption">
-                    {getStepDisplayTimestamp(step.index)}
-                  </Typography>
-                </StepButton>
-              </Step>
-            ))}
-          </Stepper>
-        </CardContent>
-      </Card>
+    <Box sx={{ marginTop: 5 }}>
+      <Stepper activeStep={activeStepIndex} alternativeLabel>
+        {steps.map((step, index) => (
+          <Step key={step.index}>
+            <StepButton onClick={() => onStepClick(step)}>
+              <Typography>
+                {getStepDisplayLabel(step.label) || `Etape ${step.index}`}
+              </Typography>
+              <Typography variant="caption">
+                {getStepDisplayTimestamp(step.index)}
+              </Typography>
+            </StepButton>
+          </Step>
+        ))}
+      </Stepper>
 
       {/* TODO: Try Mui modal  */}
       <Modal open={showModal} onClose={toggleShowModal}>
@@ -92,6 +91,7 @@ export default function StepProgressView() {
             >
               Annuler
             </Button>
+
             {canReset() && (
               <Button onClick={handleResetStep} color="warning">
                 Reset
@@ -100,6 +100,6 @@ export default function StepProgressView() {
           </div>
         </Box>
       </Modal>
-    </div>
+    </Box>
   );
 }

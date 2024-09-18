@@ -2,16 +2,14 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import React, { useEffect, useState } from "react";
 import GetTimeUseCase from "../../../../../UseCase/GetTimeUseCase/GetTimeUseCase";
 import { JobStatusQuery } from "../../../../../Domain/Queries/JobStatusQuery";
-import { timeStamp } from "console";
 import PostTimeUseCase from "../../../../../UseCase/PostTimeUseCase/PostTimeUseCase";
 
 interface Step {
   index: number;
   label: string;
   timestamp: string | null;
-  order: number;
 }
-
+//TODO: Faire propre
 export default function StepProgressViewModel() {
   const useCase = GetTimeUseCase();
   const updateUseCase = PostTimeUseCase();
@@ -40,17 +38,19 @@ export default function StepProgressViewModel() {
 
   useEffect(() => {
     if (!data) return;
-    const stepsMapped = Object.keys(data).map((key, index) => ({
-      index,
-      label: key,
-      timestamp: data[key as keyof JobStatusQuery],
-      order: getDisplayOrder(key),
-    }));
+    const stepsMapped = Object.keys(data)
+      .map((key, index) => ({
+        index: getDisplayOrder(key),
+        label: key,
+        timestamp: data[key as keyof JobStatusQuery],
+      }))
+      .sort((a, b) => a.index - b.index);
     setSteps(stepsMapped);
+    console.log(stepsMapped);
     const firstTimestampNull = stepsMapped.find(
       (step) => step.timestamp === null
     );
-
+    console.log("first timestamp null", firstTimestampNull);
     setActiveStep(firstTimestampNull || null);
   }, [data]);
 
@@ -130,6 +130,8 @@ export default function StepProgressViewModel() {
     newStepDate.setMinutes(parseInt(m));
     if (s) newStepDate.setSeconds(parseInt(s));
     updateStep(editingStep, newStepDate.toISOString());
+    toggleShowModal();
+
   };
 
   const updateTempTimestamp = (e: React.ChangeEvent<HTMLInputElement>) =>
@@ -142,23 +144,26 @@ export default function StepProgressViewModel() {
     return new Date(step.timestamp).toLocaleTimeString();
   };
 
+  //TODO Mettre de l'asynchrone dans le reset step
   const handleResetStep = () => {
     if (!editingStep) return;
     updateStep(editingStep, "null");
+    toggleShowModal();
   };
 
   const canReset = () => {
     if (!editingStep) return false;
-    const nextStepIndex = editingStep.order + 1;
-    const nextStep = steps.find((step) => step.order === nextStepIndex);
+    const nextStepIndex = editingStep.index + 1;
+    const nextStep = steps.find((step) => step.index === nextStepIndex);
     if (!nextStep) return true;
     if (nextStep.timestamp !== null) return false;
+    return true;
   };
 
+  console.log(activeStep);
   const activeStepIndex = activeStep ? activeStep.index : steps.length;
-
   return {
-    steps: steps.sort((a, b) => a.order - b.order),
+    steps: steps.sort((a, b) => a.index - b.index),
     activeStep,
     isLoading,
     isError,
