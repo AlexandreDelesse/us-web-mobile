@@ -1,4 +1,4 @@
-import { apiGetJobList } from "../../DataSource/api";
+import { apiGetJobList, webApi } from "../../DataSource/api";
 import { getCrew } from "../../DataSource/localStorage";
 
 export default function GetJobListUseCase() {
@@ -6,8 +6,10 @@ export default function GetJobListUseCase() {
     try {
       const crew = getCrew();
       const crewToken = crew ? crew.token : "";
+      const serviceInfos = await webApi.joblist.get(crewToken);
+      console.log("service infos", serviceInfos);
       const jobList = await apiGetJobList(crewToken || "");
-      return jobList;
+      return serviceInfos;
     } catch (error) {
       throw error;
     }

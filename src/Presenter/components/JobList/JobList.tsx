@@ -1,13 +1,19 @@
 import React from "react";
 import JobListViewModel from "./JobListViewModel";
-import { Box, Skeleton } from "@mui/material";
+import { Alert, AlertTitle, Box, Button, Skeleton } from "@mui/material";
 import ErrorHandler from "../ErrorHandler/ErrorHandler";
 import { ShortJob } from "../../../Domain/ShortJob";
 import JobListItemView from "./JobListItemView";
 
 export default function JobList() {
-  const { jobList, isLoading, error, onClickOnItem, emptyListMessage } =
-    JobListViewModel();
+  const {
+    jobList,
+    isLoading,
+    error,
+    onClickOnItem,
+    emptyListMessage,
+    instructions,
+  } = JobListViewModel();
 
   const loadingSkeleton = (
     <Box
@@ -22,13 +28,34 @@ export default function JobList() {
   if (isLoading) return loadingSkeleton;
 
   if (error) return <ErrorHandler error={error} />;
+  //TODO: Créer un composant InstructionsList
 
-  if (jobList.length < 1) return <Box sx={{textAlign: "center", padding: 5}}>{emptyListMessage}</Box>;
-  
   return (
     <div>
+      {instructions.map((instruction) => (
+        <Alert
+          action={
+            <Button color="inherit" size="small">
+              Bien recus
+            </Button>
+          }
+          severity="info"
+          key={instruction.jobId}
+          sx={{ my: 1 }}
+        >
+          <AlertTitle>{instruction.patient}</AlertTitle>
+          {instruction.schedule}
+        </Alert>
+      ))}
+      {jobList.length < 1 && (
+        <Box sx={{ textAlign: "center", padding: 5 }}>{emptyListMessage}</Box>
+      )}
       {jobList.map((shortJob: ShortJob) => (
-        <JobListItemView key={shortJob.jobId} shortJob={shortJob} onClickOnItem={onClickOnItem} />
+        <JobListItemView
+          key={shortJob.jobId}
+          shortJob={shortJob}
+          onClickOnItem={onClickOnItem}
+        />
       ))}
     </div>
   );
