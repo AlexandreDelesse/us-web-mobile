@@ -31,12 +31,13 @@ export default function JobListItemView(props: IJobListItemViewProps) {
   const toggleExpand = () => setIsExpanded((old) => !old);
 
   const handleOnClickOnItem = () => {
+    if (!shortJob.isAck) return;
     onClickOnItem(shortJob.jobId);
   };
 
   return (
     <Card className="my-2" elevation={0}>
-      <CardActionArea sx={{ paddingX: 0 }} onClick={toggleExpand}>
+      <CardActionArea sx={{ paddingX: 0 }} onClick={handleOnClickOnItem}>
         <Box
           sx={{ display: "grid", gridTemplateColumns: "4px 1fr", padding: 1 }}
         >
@@ -67,11 +68,15 @@ export default function JobListItemView(props: IJobListItemViewProps) {
               </Typography>
             </div>
 
-            <ExpandIcon isExpanded={isExpanded} />
+            {!shortJob.isAck ? (
+              <AcknowledgeButton icon jobId={shortJob.jobId} />
+            ) : (
+              <ExpandIcon isExpanded={isExpanded} />
+            )}
           </CardContent>
         </Box>
       </CardActionArea>
-      <Collapse unmountOnExit in={isExpanded}>
+      {/* <Collapse unmountOnExit in={isExpanded}>
         <CardContent>
           <FromTo from={shortJob.departure} to={shortJob.arrival} />
         </CardContent>
@@ -91,7 +96,7 @@ export default function JobListItemView(props: IJobListItemViewProps) {
             )}
           </>
         </CardActions>
-      </Collapse>
+      </Collapse> */}
     </Card>
   );
 }

@@ -22,9 +22,9 @@ export default function JobListViewModel() {
 
   const filterJobs = () => {
     if (!data) return [];
-    if (shouldShowJobTerminated) return data.joblist;
+    if (shouldShowJobTerminated) return data.jobList;
     else
-      return data.joblist.filter((el: ShortJob) => el.isTerminated === false);
+      return data.jobList.filter((el: ShortJob) => el.isTerminated === false);
   };
 
   const emptyListMessage = `Aucune mission ${
@@ -33,7 +33,7 @@ export default function JobListViewModel() {
 
   return {
     jobList: filterJobs(),
-    instructions: data ? data.instructions : [],
+    instructions: data ? data.instructionList : [],
     isLoading,
     error,
     onClickOnItem,

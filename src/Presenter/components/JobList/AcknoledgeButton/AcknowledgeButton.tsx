@@ -1,13 +1,15 @@
-import { Button, CircularProgress } from "@mui/material";
+import { Button, CircularProgress, IconButton } from "@mui/material";
 import ThumbUpIcon from "@mui/icons-material/ThumbUp";
 import AcknowledgeButtonViewModel from "./AcknowledgeButtonViewModel";
+import { ChangeEvent } from "react";
 
 interface AcknoledgeButtonProps {
   jobId: string;
+  icon?: boolean;
 }
 
 export default function AcknowledgeButton(props: AcknoledgeButtonProps) {
-  const { jobId } = props;
+  const { jobId, icon } = props;
   const { onClickOnAck, isPending, error } = AcknowledgeButtonViewModel();
   //   const ackMutation = useAckJobMutation();
 
@@ -15,7 +17,25 @@ export default function AcknowledgeButton(props: AcknoledgeButtonProps) {
   //     ackMutation.variables?.jobId === jobId && ackMutation.isLoading;
   const isLoading = true;
 
-  const handleOnAck = () => onClickOnAck(jobId);
+  const handleOnAck = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    e.stopPropagation()
+    onClickOnAck(jobId);
+  };
+
+  if (icon)
+    return (
+      <IconButton
+        color="success"
+        onClick={(e) => handleOnAck(e)}
+        disabled={isPending}
+      >
+        {isPending ? (
+          <CircularProgress size={16} sx={{ color: "#fff" }} />
+        ) : (
+          <ThumbUpIcon color="primary" />
+        )}
+      </IconButton>
+    );
 
   return (
     <Button
@@ -29,7 +49,7 @@ export default function AcknowledgeButton(props: AcknoledgeButtonProps) {
       }
       variant="contained"
       color="success"
-      onClick={handleOnAck}
+      onClick={(e) => handleOnAck(e)}
       disabled={isPending}
     >
       Ok !

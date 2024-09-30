@@ -4,6 +4,7 @@ import { Alert, AlertTitle, Box, Button, Skeleton } from "@mui/material";
 import ErrorHandler from "../ErrorHandler/ErrorHandler";
 import { ShortJob } from "../../../Domain/ShortJob";
 import JobListItemView from "./JobListItemView";
+import DateFormatter from "../DateFormatter/DateFormatter";
 
 export default function JobList() {
   const {
@@ -40,11 +41,11 @@ export default function JobList() {
             </Button>
           }
           severity="info"
-          key={instruction.jobId}
+          key={instruction.id}
           sx={{ my: 1 }}
         >
-          <AlertTitle>{instruction.patient}</AlertTitle>
-          {instruction.schedule}
+          <AlertTitle>{instruction.message}</AlertTitle>
+          <DateFormatter dateToParse={instruction.date} />
         </Alert>
       ))}
       {jobList.length < 1 && (
