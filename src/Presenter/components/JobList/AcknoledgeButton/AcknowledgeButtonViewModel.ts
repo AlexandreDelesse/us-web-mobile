@@ -11,7 +11,7 @@ export default function AcknowledgeButtonViewModel() {
   });
 
   const onClickOnAck = (jobId: string) => {
-    mutate({ jobId: jobId, acknowledged: true });
+    mutate({ jobId: jobId, acknowledged: true, isJob: true });
   };
 
   return { onClickOnAck, isPending, error };

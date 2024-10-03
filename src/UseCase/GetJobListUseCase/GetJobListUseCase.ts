@@ -5,9 +5,8 @@ export default function GetJobListUseCase() {
   const execute = async () => {
     try {
       const crew = getCrew();
-      const crewToken = crew ? crew.token : "";
-      const serviceInfos = await webApi.joblist.get(crewToken);
-      const jobList = await apiGetJobList(crewToken || "");
+      const crewId = crew ? crew.crewId : 0;
+      const serviceInfos = await webApi.joblist.get(crewId);
       return serviceInfos;
     } catch (error) {
       throw error;

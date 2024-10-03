@@ -26,8 +26,8 @@ export class JoblistRoute {
   //   return serviceInfos;
   // }
 
-    async get(gCrewToken: string): Promise<ServiceInformations> {
-      const axiosResponse = await this.baseApi.get(`JobList/${gCrewToken}`);
+    async get(intCrewId: number): Promise<ServiceInformations> {
+      const axiosResponse = await this.baseApi.get(`JobList/${intCrewId}`);
        return axiosResponse.data;
     }
 
