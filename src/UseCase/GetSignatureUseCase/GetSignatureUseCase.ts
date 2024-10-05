@@ -14,11 +14,7 @@ export default function GetSignatureUseCase(): UseCase<Signature, any> {
       return signature;
     } catch (error) {
       if (error instanceof AxiosError)
-        if (
-          error.response?.status === 400 &&
-          error.response.data.includes("Pas de signature")
-        )
-          return { dateTime: "", data: "" };
+        if (error.response?.status === 404) return { dateTime: "", data: "" };
         else throw error;
       else throw error;
     }

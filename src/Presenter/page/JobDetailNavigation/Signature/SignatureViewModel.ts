@@ -1,4 +1,9 @@
-import { useMutation, useQuery } from "@tanstack/react-query";
+import {
+  QueryClient,
+  useMutation,
+  useQuery,
+  useQueryClient,
+} from "@tanstack/react-query";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
@@ -6,15 +11,18 @@ import ReactSignatureCanvas from "react-signature-canvas";
 import GetSignatureUseCase from "../../../../UseCase/GetSignatureUseCase/GetSignatureUseCase";
 import UpdateSignatureUseCase from "../../../../UseCase/UpdateSignatureUseCase/UpdateSignatureUseCase";
 import { SignatureCmd } from "../../../../DataSource/WebApi/Routes/SignatureRoute";
+import { apiGetSignature, webApi } from "../../../../DataSource/api";
+import { AxiosError } from "axios";
 
 export default function SignatureViewModel() {
-  const getSignatureUseCase = GetSignatureUseCase();
-  const updateSignatureUseCase = UpdateSignatureUseCase();
   const { id } = useParams();
 
   const [signature, setSignature] = useState("");
   const [signedAt, setSignedAt] = useState("");
   const [signRef, setSignRef] = useState<ReactSignatureCanvas | null>(null);
+  const [isLoading, setIsloading] = useState(false);
+  const [error, setError] = useState<Error | AxiosError | null>(null);
+  const [refresh, setRefresh] = useState(false);
 
   const getDisplayDateAndTime = (
     isoDate: string
@@ -29,28 +37,38 @@ export default function SignatureViewModel() {
     };
   };
 
-  const { data, isLoading, error } = useQuery({
-    queryKey: ["signature", id],
-    queryFn: () => getSignatureUseCase.execute(id || ""),
-  });
-
-  const { mutate } = useMutation({
-    mutationFn: (signCmd: SignatureCmd) =>
-      updateSignatureUseCase.execute(signCmd),
-  });
-
   useEffect(() => {
-    if (!data) return;
-    setSignature(data.data);
-    setSignedAt(data.dateTime);
-  }, [data]);
+    if (!id) return;
+    setIsloading(true);
+    apiGetSignature(id)
+      .then((data) => {
+        setSignature(data.data);
+        setSignedAt(data.dateTime);
+        setIsloading(false);
+      })
+      .catch((err) => {
+        if (err instanceof AxiosError)
+          if (err.response?.status === 404) {
+            setSignature("");
+            setSignedAt("");
+          } else setError(err);
+        else setError(err);
+        setIsloading(false);
+      });
+  }, [refresh]);
 
-  const saveSignature = () => {
+  const saveSignature = async () => {
     if (!id) return;
     const imgDataUrl = generateImageDataUrl();
     const now = new Date();
     const isoDate = now.toISOString();
-    mutate({ jobId: id, signature: { data: imgDataUrl, dateTime: isoDate } });
+    try {
+      await webApi.signature.put({
+        jobId: id,
+        signature: { data: imgDataUrl, dateTime: isoDate },
+      });
+      setRefresh(!refresh);
+    } catch (error) {}
   };
 
   const generateImageDataUrl = () => {
