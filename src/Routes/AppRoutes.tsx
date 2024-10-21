@@ -18,25 +18,54 @@ import MainNavbarFacade from "../Presenter/components/MainNavbar/MainNavbarFacad
 import { Box } from "@mui/material";
 import CrewList from "../Presenter/page/CrewList/CrewList";
 import KilometersSetForm from "../Presenter/page/KilometersSetForm/KilometersSetForm";
+import KeycloakLogin from "../Presenter/Login/KeycloakLogin";
+import { useKeycloak } from "@react-keycloak/web";
 
+// const PrivateRoute = () => {
+//   const navigate = useNavigate();
+//   const location = useLocation();
+
+//   console.log(location.pathname)
+
+//   // useEffect(() => {
+//   //   if (location.pathname === "/regul") return;
+//   //   const crew = getCrew();
+//   //   if (!crew) navigate("login");
+//   // }, [navigate]);
+
+//   return (
+//     <>
+//       <MainNavbarFacade />
+//       <Box sx={{ padding: "16px" }}>
+//         <Outlet />
+//       </Box>
+//     </>
+//   );
+// };
 const PrivateRoute = () => {
   const navigate = useNavigate();
   const location = useLocation();
+  const { keycloak, initialized } = useKeycloak();
+
+  console.log("private route rendered");
 
   useEffect(() => {
-    if (location.pathname === "/regul") return;
-    const crew = getCrew();
-    if (!crew) navigate("login");
-  }, [navigate]);
+    if (initialized)
+      if (!keycloak.authenticated) return navigate("loginKeycloak");
+  }, [navigate, keycloak, initialized, location.pathname]);
 
-  return (
-    <>
-      <MainNavbarFacade />
-      <Box sx={{ padding: "16px" }}>
-        <Outlet />
-      </Box>
-    </>
-  );
+  if (!initialized) return <>Chargement...</>;
+
+  if (keycloak.authenticated)
+    return (
+      <>
+        <MainNavbarFacade />
+        <Box sx={{ padding: "16px" }}>
+          <Outlet />
+        </Box>
+      </>
+    );
+  return <>Authentifiez vous pour acceder a cette page</>;
 };
 
 export const appRouter = createHashRouter([
@@ -61,5 +90,11 @@ export const appRouter = createHashRouter([
       { path: "regul", element: <CrewList /> },
     ],
   },
+  { path: "loginKeycloak", element: <KeycloakLogin /> },
   { path: "/*", element: <Page404 /> },
 ]);
+
+// export const appRouter = createHashRouter([
+//   { index: true, element: <Home /> },
+//   { path: "*", element: <KeycloakLogin /> },
+// ]);

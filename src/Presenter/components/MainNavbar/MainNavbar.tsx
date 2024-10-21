@@ -2,6 +2,8 @@ import { Navbar, Container, Nav, Offcanvas } from "react-bootstrap";
 import { useLocation } from "react-router-dom";
 import VersionDisplayerView from "../VersionDisplayer/VersionDisplayerView";
 import BackButton from "../BackButton/BackButton";
+import { useKeycloak } from "@react-keycloak/web";
+import LogoutButton from "../../Login/LogoutButton";
 
 export default function MainNavbar({
   navLinks,
@@ -14,6 +16,8 @@ export default function MainNavbar({
   navLinks: { name: string; path: string; isProtected?: boolean }[];
   onNavLinkClick: (link: string) => void;
 }) {
+  const { keycloak, initialized } = useKeycloak();
+
   const location = useLocation();
   const isMainPage = location.pathname === "/";
   return (
@@ -46,7 +50,9 @@ export default function MainNavbar({
           placement="end"
         >
           <Offcanvas.Header closeButton>
-            <Offcanvas.Title>Menu</Offcanvas.Title>
+            <Offcanvas.Title>
+              {keycloak.authenticated && keycloak.profile ? keycloak.profile.username : "Menu"}
+            </Offcanvas.Title>
           </Offcanvas.Header>
           <Offcanvas.Body className="d-flex justify-content-between flex-column">
             <Nav className="me-auto">
@@ -60,6 +66,7 @@ export default function MainNavbar({
               ))}
             </Nav>
             <div className="d-lg-none">
+              {keycloak.authenticated && <LogoutButton />}
               <VersionDisplayerView />
             </div>
           </Offcanvas.Body>

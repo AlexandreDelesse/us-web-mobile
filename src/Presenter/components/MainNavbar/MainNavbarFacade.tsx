@@ -17,7 +17,6 @@ export default function MainNavbarFacade() {
 
   const links: Link[] = [
     { name: "Missions", path: "/" },
-    { name: "Login", path: "login" },
     // { name: "regulation", path: "regul", isProtected: true },
   ];
 
