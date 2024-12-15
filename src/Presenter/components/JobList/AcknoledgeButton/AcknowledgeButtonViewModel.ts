@@ -5,7 +5,7 @@ import { AckJobCmd } from "../../../../UseCase/AckJobUseCase/AckJobCmd";
 
 export default function AcknowledgeButtonViewModel() {
   const queryClient = useQueryClient();
-  const { mutate, isPending, error } = useMutation({
+  const { mutate, isPending, error, reset } = useMutation({
     mutationFn: (cmd: AckJobCmd) => AckJobUseCase().execute(cmd),
     onSuccess: () => queryClient.invalidateQueries({ queryKey: ["jobList"] }),
   });
@@ -14,5 +14,5 @@ export default function AcknowledgeButtonViewModel() {
     mutate({ jobId: jobId, acknowledged: true, isJob: true });
   };
 
-  return { onClickOnAck, isPending, error };
+  return { onClickOnAck, isPending, error, reset };
 }

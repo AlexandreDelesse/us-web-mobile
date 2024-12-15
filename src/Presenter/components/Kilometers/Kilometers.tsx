@@ -19,7 +19,7 @@ export default function Kilometers() {
 
   return (
     <div>
-      {data && <Typography>{data.km}</Typography>}
+      {data && <Typography>{data.km} km</Typography>}
       <ErrorHandler error={error} />
     </div>
   );

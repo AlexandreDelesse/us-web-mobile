@@ -10,11 +10,11 @@ import "@fontsource/roboto/500.css";
 import "@fontsource/roboto/700.css";
 import UserLoginView from "./Presenter/page/UserLogin/UserLoginView";
 import { RouterProvider } from "react-router-dom";
-import { appRouter } from "./Routes/AppRoutes";
 import FilterContext from "./Contexts/FilterContext";
 import MainNavbarFacade from "./Presenter/components/MainNavbar/MainNavbarFacade";
 import { FieldInfos } from "./Domain/FormStructure";
 import JobEditFormContext from "./Contexts/JobEditFormContext";
+import { appRouter } from "./Router/MainRouter";
 
 const queryClient = new QueryClient();
 
