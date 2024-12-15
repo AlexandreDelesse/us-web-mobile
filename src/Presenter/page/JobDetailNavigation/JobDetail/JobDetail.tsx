@@ -1,15 +1,21 @@
-import { ReactNode } from "react";
-import JobDetailViewModel from "./JobDetailViewModel";
-import { Box, Card, CardContent, Typography } from "@mui/material";
-import FromTo from "../../../components/Utils/FromTo/FromTo";
-import EditableBeneficiary from "./Views/EditableBeneficiary";
-import StepProgressView from "./StepProgress/StepProgressView";
+import { ReactNode } from 'react'
+import JobDetailViewModel from './JobDetailViewModel'
+import { Box, Card, CardContent, Typography } from '@mui/material'
+import FromTo from '../../../components/Utils/FromTo/FromTo'
+import EditableBeneficiary from './Views/EditableBeneficiary'
+import StepProgressView from './StepProgress/StepProgressView'
+import logoLoader from '../../../../Assets/Images/logo-loader.gif'
 
 export default function JobDetail() {
-  const { jobDetail, isLoading, error } = JobDetailViewModel();
+  const { jobDetail, isLoading, error } = JobDetailViewModel()
 
-  if (!jobDetail) return <div>Pas de detail disponible</div>;
-  if (isLoading) return <div>loading</div>;
+  if (isLoading)
+    return (
+      <Box sx={{ display: 'flex', justifyContent: 'center' }}>
+        <img width={250} src={logoLoader} alt="logo qui tourne" />
+      </Box>
+    )
+  if (!jobDetail) return <div>Pas de detail disponible</div>
 
   //TODO: Factoriser les composants graphiques
   //TODO: Refaire propre et implementer stepper
@@ -47,15 +53,15 @@ export default function JobDetail() {
       {/* <StepProgressDecorator  /> */}
       <StepProgressView />
     </Box>
-  );
+  )
 }
 
 const CustomTypography = ({
   title,
   content,
 }: {
-  title: string;
-  content: ReactNode;
+  title: string
+  content: ReactNode
 }) => {
   return (
     <>
@@ -64,5 +70,5 @@ const CustomTypography = ({
         {content}
       </Typography>
     </>
-  );
-};
+  )
+}
