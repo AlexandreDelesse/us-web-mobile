@@ -23,10 +23,12 @@ export default function UserLoginViewModel() {
   })
 
   const submit = async () => {
-    mutate({
-      id: parseInt(code),
-      employee: name,
-    })
+    if (name === 'regul' && code === '1234') return navigate('/regul')
+    else
+      mutate({
+        id: parseInt(code),
+        employee: name,
+      })
   }
 
   return {

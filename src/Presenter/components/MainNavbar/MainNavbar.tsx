@@ -1,7 +1,10 @@
-import { Navbar, Container, Nav, Offcanvas } from "react-bootstrap";
-import { useLocation } from "react-router-dom";
-import VersionDisplayerView from "../VersionDisplayer/VersionDisplayerView";
-import BackButton from "../BackButton/BackButton";
+import { Navbar, Container, Nav, Offcanvas } from 'react-bootstrap'
+import { useLocation } from 'react-router-dom'
+import VersionDisplayerView from '../VersionDisplayer/VersionDisplayerView'
+import BackButton from '../BackButton/BackButton'
+import { getCrew } from '../../../DataSource/localStorage'
+import LogoutLink from './LogoutLink'
+import LoginLink from './LoginLink'
 
 export default function MainNavbar({
   navLinks,
@@ -9,22 +12,23 @@ export default function MainNavbar({
   showSidePanel,
   toggleSidePanel,
 }: {
-  showSidePanel: boolean;
-  toggleSidePanel: () => void;
-  navLinks: { name: string; path: string; isProtected?: boolean }[];
-  onNavLinkClick: (link: string) => void;
+  showSidePanel: boolean
+  toggleSidePanel: () => void
+  navLinks: { name: string; path: string; isProtected?: boolean }[]
+  onNavLinkClick: (link: string) => void
 }) {
-  const location = useLocation();
-  const isMainPage = location.pathname === "/";
+  const location = useLocation()
+  const crew = getCrew()
+  const isMainPage = location.pathname === '/'
   return (
     <Navbar bg="light" variant="light" expand="lg">
       <Container fluid>
         {isMainPage ? (
-          <Navbar.Brand onClick={() => onNavLinkClick("/")}>
+          <Navbar.Brand onClick={() => onNavLinkClick('/')}>
             <img
               className="me-3"
-              style={{ height: "32px" }}
-              src={require("../../../Assets/Images/logo-us.png")}
+              style={{ height: '32px' }}
+              src={require('../../../Assets/Images/logo-us.png')}
               alt="Logo urgence sante"
             />
             Urgence Sante
@@ -58,6 +62,7 @@ export default function MainNavbar({
                   {link.name}
                 </Nav.Link>
               ))}
+              {crew ? <LogoutLink /> : <LoginLink />}
             </Nav>
             <div className="d-lg-none">
               <VersionDisplayerView />
@@ -66,5 +71,5 @@ export default function MainNavbar({
         </Navbar.Offcanvas>
       </Container>
     </Navbar>
-  );
+  )
 }
