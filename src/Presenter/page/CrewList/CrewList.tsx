@@ -1,7 +1,7 @@
-import { useQuery } from "@tanstack/react-query";
-import React from "react";
-import GetCrewListUsecase from "../../../UseCase/GetCrewListUsecase/GetCrewListUseCase";
-import ErrorHandler from "../../components/ErrorHandler/ErrorHandler";
+import { useQuery } from '@tanstack/react-query'
+import React from 'react'
+import GetCrewListUsecase from '../../../UseCase/GetCrewListUsecase/GetCrewListUseCase'
+import ErrorHandler from '../../components/ErrorHandler/ErrorHandler'
 import {
   Button,
   Card,
@@ -12,21 +12,23 @@ import {
   ListItem,
   Skeleton,
   Typography,
-} from "@mui/material";
-import { useNavigate } from "react-router-dom";
+} from '@mui/material'
+import { useNavigate } from 'react-router-dom'
+import { clearCrew, setCrew } from '../../../DataSource/localStorage'
 
 export default function CrewList() {
-  const usecase = GetCrewListUsecase();
-  const navigate = useNavigate();
+  const usecase = GetCrewListUsecase()
+  const navigate = useNavigate()
 
   const { data, error, isLoading, isError } = useQuery({
-    queryKey: ["crewlist"],
+    queryKey: ['crewlist'],
     queryFn: usecase.execute,
-  });
+  })
 
   const goToLogin = (crewId: number, memberName: string) => {
-    navigate(`/login/${crewId}/${memberName}`);
-  };
+    clearCrew()
+    navigate(`/login/${crewId}/${memberName}`)
+  }
 
   if (isLoading)
     return (
@@ -52,16 +54,16 @@ export default function CrewList() {
           />
         </Grid>
       </Grid>
-    );
+    )
 
-  if (isError) return <ErrorHandler error={error} />;
+  if (isError) return <ErrorHandler error={error} />
 
   if (data)
     return (
       <Grid container spacing={1}>
         {data.map((el) => (
           <Grid key={el.crewId} item xs={12} sm={6} lg={4}>
-            <Card elevation={0} sx={{ backgroundColor: "whitesmoke" }}>
+            <Card elevation={0} sx={{ backgroundColor: 'whitesmoke' }}>
               <CardHeader
                 title={el.immat}
                 subheader={el.label}
@@ -92,13 +94,13 @@ export default function CrewList() {
                   <Grid item xs={6}>
                     <Typography variant="caption">Début</Typography>
                     <Typography>
-                      {new Date(el.start || "").toLocaleString()}
+                      {new Date(el.start || '').toLocaleString()}
                     </Typography>
                   </Grid>
                   <Grid item xs={6}>
                     <Typography variant="caption">Fin</Typography>
                     <Typography>
-                      {new Date(el.end || "").toLocaleString()}
+                      {new Date(el.end || '').toLocaleString()}
                     </Typography>
                   </Grid>
                 </Grid>
@@ -107,7 +109,7 @@ export default function CrewList() {
           </Grid>
         ))}
       </Grid>
-    );
+    )
 
-  return <>Something wrong appends</>;
+  return <>Something wrong appends</>
 }

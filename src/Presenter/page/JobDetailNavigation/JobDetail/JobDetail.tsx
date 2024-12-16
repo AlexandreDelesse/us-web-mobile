@@ -5,17 +5,14 @@ import FromTo from '../../../components/Utils/FromTo/FromTo'
 import EditableBeneficiary from './Views/EditableBeneficiary'
 import StepProgressView from './StepProgress/StepProgressView'
 import logoLoader from '../../../../Assets/Images/logo-loader.gif'
+import ErrorHandler from '../../../components/ErrorHandler/ErrorHandler'
+import LogoLoader from '../../../../SharedComponents/LogoLoader'
 
 export default function JobDetail() {
   const { jobDetail, isLoading, error } = JobDetailViewModel()
 
-  if (isLoading)
-    return (
-      <Box sx={{ display: 'flex', justifyContent: 'center' }}>
-        <img width={250} src={logoLoader} alt="logo qui tourne" />
-      </Box>
-    )
-  if (!jobDetail) return <div>Pas de detail disponible</div>
+  if (isLoading) return <LogoLoader />
+  if (!jobDetail) return <ErrorHandler error={error} />
 
   //TODO: Factoriser les composants graphiques
   //TODO: Refaire propre et implementer stepper

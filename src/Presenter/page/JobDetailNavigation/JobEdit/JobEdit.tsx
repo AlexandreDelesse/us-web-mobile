@@ -1,9 +1,10 @@
-import JobEditViewModel from "./JobEditViewModel";
-import FormFactory from "./FormFactory/FormFactory";
-import { Alert, Box, Button } from "@mui/material";
-import { FieldInfos } from "../../../../Domain/FormStructure";
-import ErrorHandler from "../../../components/ErrorHandler/ErrorHandler";
-import { AlertHeading } from "react-bootstrap";
+import JobEditViewModel from './JobEditViewModel'
+import FormFactory from './FormFactory/FormFactory'
+import { Alert, Box, Button } from '@mui/material'
+import { FieldInfos } from '../../../../Domain/FormStructure'
+import ErrorHandler from '../../../components/ErrorHandler/ErrorHandler'
+import { AlertHeading } from 'react-bootstrap'
+import LogoLoader from '../../../../SharedComponents/LogoLoader'
 
 export default function JobEdit() {
   const {
@@ -15,13 +16,13 @@ export default function JobEdit() {
     onValueChanges,
     data,
     isPending,
-  } = JobEditViewModel();
+  } = JobEditViewModel()
 
-  if (isLoading || isRefetching) return <div>Loading</div>;
+  if (isLoading || isRefetching) return <LogoLoader />
 
-  if (!data) return <div>No data yet</div>;
+  if (!data) return <div>No data yet</div>
 
-  if (error) return <ErrorHandler error={error} />;
+  if (error) return <ErrorHandler error={error} />
 
   return (
     <Box>
@@ -41,5 +42,5 @@ export default function JobEdit() {
         Sauvegarder
       </Button>
     </Box>
-  );
+  )
 }
