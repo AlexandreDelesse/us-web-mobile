@@ -2,6 +2,7 @@ import { Box, Button, Card, CardContent, Icon, Typography } from '@mui/material'
 import UserLoginViewModel from './UserLoginViewModel'
 import OutlinedTextField from '../../components/OutlinedTextField/OutlinedTextField'
 import ErrorHandler from '../../components/ErrorHandler/ErrorHandler'
+import React from 'react'
 
 export default function UserLoginView() {
   const {
@@ -13,6 +14,11 @@ export default function UserLoginView() {
     isPending,
     error,
   } = UserLoginViewModel()
+
+  const handleOnKeyUp = (event: React.KeyboardEvent) => {
+    if (event.key == 'Enter') return submit()
+    return
+  }
 
   return (
     <Card
@@ -34,11 +40,13 @@ export default function UserLoginView() {
           label={'Nom'}
           value={name}
           onChange={(e) => setName(e.target.value)}
+          onKeyUp={handleOnKeyUp}
         />
         <OutlinedTextField
           label={'Code'}
           value={code}
           onChange={(e) => setCode(e.target.value)}
+          onKeyUp={handleOnKeyUp}
         />
         <Button
           onClick={submit}
@@ -51,7 +59,6 @@ export default function UserLoginView() {
         </Button>
 
         <ErrorHandler error={error} complementMsg="Verifiez vos identifiants" />
-
       </CardContent>
     </Card>
   )

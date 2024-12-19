@@ -1,30 +1,33 @@
-import { TextField } from "@mui/material";
+import { TextField } from '@mui/material'
+import React from 'react'
 
 interface OutlinedTextFieldProps {
-  value: string;
-  onChange: (e: React.ChangeEvent<HTMLInputElement>, index?: number) => any;
-  label: string;
-  name?: string;
-  type?: string;
-  inputLabelprops?: { shrink: boolean };
-  error?: boolean;
-  helperText?: string;
-  multiline?: boolean;
+  value: string
+  onChange: (e: React.ChangeEvent<HTMLInputElement>, index?: number) => any
+  onKeyUp?: React.KeyboardEventHandler<HTMLDivElement>
+  label: string
+  name?: string
+  type?: string
+  inputLabelprops?: { shrink: boolean }
+  error?: boolean
+  helperText?: string
+  multiline?: boolean
   inputMode?:
-    | "text"
-    | "email"
-    | "tel"
-    | "search"
-    | "url"
-    | "none"
-    | "numeric"
-    | "decimal"
-    | undefined;
+    | 'text'
+    | 'email'
+    | 'tel'
+    | 'search'
+    | 'url'
+    | 'none'
+    | 'numeric'
+    | 'decimal'
+    | undefined
 }
 export default function OutlinedTextField(props: OutlinedTextFieldProps) {
   const {
     value,
     onChange,
+    onKeyUp,
     label,
     type,
     inputLabelprops,
@@ -33,23 +36,24 @@ export default function OutlinedTextField(props: OutlinedTextFieldProps) {
     multiline,
     inputMode,
     name,
-  } = props;
+  } = props
 
   return (
     <TextField
-      sx={{ width: "100%", my: 1 }}
+      sx={{ width: '100%', my: 1 }}
       value={value}
       onChange={onChange}
+      onKeyUp={onKeyUp}
       label={label}
       size="small"
-      type={type || "text"}
+      type={type || 'text'}
       InputLabelProps={inputLabelprops}
       error={error || false}
-      helperText={helperText || ""}
+      helperText={helperText || ''}
       multiline={multiline || false}
       rows={3}
       inputMode={inputMode}
       name={name}
     />
-  );
+  )
 }
