@@ -9,7 +9,7 @@ import { Signature } from "../Domain/Signature";
 import { WebApi } from "./WebApi/WebApi";
 
 const api = axios.create({
-  baseURL: "http://intranet.urgencesante.fr:8085/api",
+  baseURL: "http://intranet.urgencesante.fr:8090/api",
   timeout: 1000,
 });
 
