@@ -74,11 +74,11 @@ export default function KilometersSetForm() {
         >
           Valider
         </Button>
-        {/* <Button color="secondary" onClick={() => navigate('/')}>
+        <Button color="secondary" onClick={() => navigate('/')}>
           Skip
-        </Button> */}
+        </Button>
 
-        <ErrorHandler error={error} />
+        <ErrorHandler error={error} complementMsg='Veuillez entrer le kilometrage'/>
       </CardContent>
     </Card>
   )

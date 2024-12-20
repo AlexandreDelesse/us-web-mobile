@@ -1,23 +1,24 @@
-import { ReactNode } from 'react'
-import JobDetailViewModel from './JobDetailViewModel'
-import { Box, Card, CardContent, Typography } from '@mui/material'
-import FromTo from '../../../components/Utils/FromTo/FromTo'
-import EditableBeneficiary from './Views/EditableBeneficiary'
-import StepProgressView from './StepProgress/StepProgressView'
-import logoLoader from '../../../../Assets/Images/logo-loader.gif'
-import ErrorHandler from '../../../components/ErrorHandler/ErrorHandler'
-import LogoLoader from '../../../../SharedComponents/LogoLoader'
+import { ReactNode } from "react";
+import JobDetailViewModel from "./JobDetailViewModel";
+import { Box, Card, CardContent, Typography } from "@mui/material";
+import FromTo from "../../../components/Utils/FromTo/FromTo";
+import EditableBeneficiary from "./Views/EditableBeneficiary";
+import StepProgressView from "./StepProgress/StepProgressView";
+import logoLoader from "../../../../Assets/Images/logo-loader.gif";
+import ErrorHandler from "../../../components/ErrorHandler/ErrorHandler";
+import LogoLoader from "../../../../SharedComponents/LogoLoader";
 
 export default function JobDetail() {
-  const { jobDetail, isLoading, error } = JobDetailViewModel()
+  const { jobDetail, isLoading, error } = JobDetailViewModel();
 
-  if (isLoading) return <LogoLoader />
-  if (!jobDetail) return <ErrorHandler error={error} />
+  if (isLoading) return <LogoLoader />;
+  if (!jobDetail) return <ErrorHandler error={error} />;
 
   //TODO: Factoriser les composants graphiques
   //TODO: Refaire propre et implementer stepper
   return (
     <Box>
+      <StepProgressView />
       <EditableBeneficiary beneficiary={jobDetail.beneficiary} />
       <Typography variant="body1">
         Né le {jobDetail.beneficiary.ddn} - {jobDetail.beneficiary.age}
@@ -48,17 +49,16 @@ export default function JobDetail() {
       )}
 
       {/* <StepProgressDecorator  /> */}
-      <StepProgressView />
     </Box>
-  )
+  );
 }
 
 const CustomTypography = ({
   title,
   content,
 }: {
-  title: string
-  content: ReactNode
+  title: string;
+  content: ReactNode;
 }) => {
   return (
     <>
@@ -67,5 +67,5 @@ const CustomTypography = ({
         {content}
       </Typography>
     </>
-  )
-}
+  );
+};
