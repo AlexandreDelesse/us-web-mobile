@@ -18,12 +18,12 @@ export default function JobDetail() {
   //TODO: Refaire propre et implementer stepper
   return (
     <Box>
-      <StepProgressView />
       <EditableBeneficiary beneficiary={jobDetail.beneficiary} />
-      <Typography variant="body1">
+      <Typography variant="body1" sx={{ marginBottom: 1 }}>
         Né le {jobDetail.beneficiary.ddn} - {jobDetail.beneficiary.age}
       </Typography>
 
+      <StepProgressView />
       <Card elevation={0} sx={{ marginY: 1 }}>
         <CardContent>
           <CustomTypography
