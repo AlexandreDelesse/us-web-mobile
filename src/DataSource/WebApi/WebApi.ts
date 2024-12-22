@@ -9,7 +9,7 @@ import { JoblistRoute } from "./Routes/JoblistRoute";
 
 export class WebApi {
   private baseApi: AxiosInstance = axios.create({
-    baseURL: "http://intranet.urgencesante.fr:8090/api",
+    baseURL: "http://intranet.urgencesante.fr:8075/api",
     timeout: 1000,
   });
 
