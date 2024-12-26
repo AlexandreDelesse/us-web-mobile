@@ -4,7 +4,7 @@
 set -e
 
 # Variables à personnaliser
-IMAGE_NAME="alexandredelesse/usclient"  # Nom de l'image Docker
+IMAGE_NAME="alexandredelesse/usclientdev"  # Nom de l'image Docker
 IMAGE_TAG="latest"                 # Tag de l'image (par défaut : latest)
 
 # Étape 1 : Connexion au registre Docker

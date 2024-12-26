@@ -4,10 +4,10 @@
 set -e
 
 # Variables à personnaliser
-IMAGE_NAME="alexandredelesse/usclient"  # Nom de l'image Docker
+IMAGE_NAME="alexandredelesse/usclientdev"  # Nom de l'image Docker
 IMAGE_TAG="latest"                 # Tag de l'image (par défaut : latest)
 CONTAINER_NAME="us-client" # Nom du conteneur
-PORT_MAPPING="3010:80"           # Mapping des ports (hôte:conteneur)
+PORT_MAPPING="3011:80"           # Mapping des ports (hôte:conteneur)
 
 # Étape 1 : Tirer la nouvelle image depuis le registre
 docker login
