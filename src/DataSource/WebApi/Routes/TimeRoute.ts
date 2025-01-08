@@ -1,4 +1,4 @@
-import { AxiosInstance } from "axios";
+import axios, { AxiosInstance } from "axios";
 import { JobStatusQuery } from "../../../Domain/Queries/JobStatusQuery";
 import { JobStatusCommand } from "../../../Domain/Commands/JobStatusCommand";
 
@@ -17,8 +17,17 @@ export class TimeRoute {
   }
 
   async get(gJobId: string): Promise<JobStatusGetResponse> {
-    const axiosResponse = await this.baseApi.get(`Time/${gJobId}`);
-    return axiosResponse.data;
+    try {
+      const axiosResponse = await this.baseApi.get(`Time/${gJobId}`);
+      let jobStatus = {
+        available: axiosResponse.data.terminatedTime,
+        go: axiosResponse.data.goTime,
+        onSite: axiosResponse.data.onSiteTime,
+      };
+      return jobStatus;
+    } catch (error) {
+      throw error;
+    }
   }
 
   async patch(steps: JobStatusCommand, gJobId: string) {
