@@ -1,9 +1,9 @@
-import React, { useState } from "react";
+import React from "react";
 import { InputProps } from "../../../../../../Domain/FormStructure";
 import OutlinedTextField from "../../../../../components/OutlinedTextField/OutlinedTextField";
 
 export default function DatePicker(props: InputProps) {
-  const { label, name, setValue, type, value } = props;
+  const { label, name, setValue, value } = props;
 
   const mapIsoToDatepicker = (iso: string) => {
     if (!iso) return "";

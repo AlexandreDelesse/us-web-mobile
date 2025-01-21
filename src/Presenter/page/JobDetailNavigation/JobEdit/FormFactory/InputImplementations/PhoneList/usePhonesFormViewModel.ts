@@ -44,7 +44,7 @@ export default function usePhonesFormViewModel(props: InputProps) {
       .filter((el) => el.value === "");
     setPhoneErrors(emptyPhoneErrors);
     setValue(name, JSON.stringify(phones));
-  }, [phones]);
+  }, [phones, name, setValue]);
 
   const getError = (index: number) =>
     phoneErrors.find((el, i) => el.index === index);

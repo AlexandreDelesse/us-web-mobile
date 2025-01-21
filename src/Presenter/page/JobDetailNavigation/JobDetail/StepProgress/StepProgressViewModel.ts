@@ -3,7 +3,6 @@ import React, { useEffect, useState } from "react";
 import GetTimeUseCase from "../../../../../UseCase/GetTimeUseCase/GetTimeUseCase";
 import { JobStatusQuery } from "../../../../../Domain/Queries/JobStatusQuery";
 import PostTimeUseCase from "../../../../../UseCase/PostTimeUseCase/PostTimeUseCase";
-import { JobStatusCommand } from "../../../../../Domain/Commands/JobStatusCommand";
 
 interface Step {
   index: number;
@@ -35,7 +34,6 @@ export default function StepProgressViewModel() {
 
   const {
     isPending,
-    isError: isUpdateError,
     error: updateError,
     mutateAsync,
   } = useMutation({

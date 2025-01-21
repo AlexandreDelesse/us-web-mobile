@@ -1,34 +1,27 @@
-import { Box, Button, Card, CardContent, Icon, Typography } from '@mui/material'
-import UserLoginViewModel from './UserLoginViewModel'
-import OutlinedTextField from '../../components/OutlinedTextField/OutlinedTextField'
-import ErrorHandler from '../../components/ErrorHandler/ErrorHandler'
-import React from 'react'
+import { Button, Card, CardContent, Typography } from "@mui/material";
+import UserLoginViewModel from "./UserLoginViewModel";
+import OutlinedTextField from "../../components/OutlinedTextField/OutlinedTextField";
+import ErrorHandler from "../../components/ErrorHandler/ErrorHandler";
+import React from "react";
 
 export default function UserLoginView() {
-  const {
-    code,
-    name,
-    setCode,
-    setName,
-    submit,
-    isPending,
-    error,
-  } = UserLoginViewModel()
+  const { code, name, setCode, setName, submit, isPending, error } =
+    UserLoginViewModel();
 
   const handleOnKeyUp = (event: React.KeyboardEvent) => {
-    if (event.key == 'Enter') return submit()
-    return
-  }
+    if (event.key === "Enter") return submit();
+    return;
+  };
 
   return (
     <Card
       sx={{
         my: 2,
-        maxWidth: '400px',
-        position: 'absolute',
-        left: '50%',
-        top: '30%',
-        transform: 'translate(-50%,-50%)',
+        maxWidth: "400px",
+        position: "absolute",
+        left: "50%",
+        top: "30%",
+        transform: "translate(-50%,-50%)",
       }}
       elevation={0}
     >
@@ -37,13 +30,13 @@ export default function UserLoginView() {
           Connexion
         </Typography>
         <OutlinedTextField
-          label={'Nom'}
+          label={"Nom"}
           value={name}
           onChange={(e) => setName(e.target.value)}
           onKeyUp={handleOnKeyUp}
         />
         <OutlinedTextField
-          label={'Code'}
+          label={"Code"}
           value={code}
           onChange={(e) => setCode(e.target.value)}
           onKeyUp={handleOnKeyUp}
@@ -61,5 +54,5 @@ export default function UserLoginView() {
         <ErrorHandler error={error} complementMsg="Verifiez vos identifiants" />
       </CardContent>
     </Card>
-  )
+  );
 }

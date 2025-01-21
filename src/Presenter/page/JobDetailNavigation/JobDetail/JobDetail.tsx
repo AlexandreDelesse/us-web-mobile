@@ -4,7 +4,6 @@ import { Box, Card, CardContent, Typography } from "@mui/material";
 import FromTo from "../../../components/Utils/FromTo/FromTo";
 import EditableBeneficiary from "./Views/EditableBeneficiary";
 import StepProgressView from "./StepProgress/StepProgressView";
-import logoLoader from "../../../../Assets/Images/logo-loader.gif";
 import ErrorHandler from "../../../components/ErrorHandler/ErrorHandler";
 import LogoLoader from "../../../../SharedComponents/LogoLoader";
 
@@ -26,6 +25,17 @@ export default function JobDetail() {
       <StepProgressView />
       <Card elevation={0} sx={{ marginY: 1 }}>
         <CardContent>
+          <CustomTypography
+            contentColor="orange"
+            title="Téléphone"
+            content={
+              jobDetail.beneficiary.phones.length > 0
+                ? jobDetail.beneficiary.phones.map((phone) => (
+                    <div>{phone}</div>
+                  ))
+                : "Pas de numéro enregistré"
+            }
+          ></CustomTypography>
           <CustomTypography
             title="Prise en charge"
             content={jobDetail.schedule}
@@ -56,14 +66,20 @@ export default function JobDetail() {
 const CustomTypography = ({
   title,
   content,
+  contentColor,
 }: {
   title: string;
   content: ReactNode;
+  contentColor?: string;
 }) => {
   return (
     <>
       <Typography variant="caption">{title}</Typography>
-      <Typography className="fw-bold" variant="body1" color="primary">
+      <Typography
+        className="fw-bold"
+        variant="body1"
+        color={contentColor || "primary"}
+      >
         {content}
       </Typography>
     </>

@@ -1,22 +1,16 @@
 import {
   Box,
-  Button,
   Card,
   CardActionArea,
-  CardActions,
   CardContent,
-  Collapse,
   Typography,
 } from "@mui/material";
-import { useState } from "react";
 import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
-import VisibilityIcon from "@mui/icons-material/Visibility";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 
 import { ShortJob } from "../../../Domain/ShortJob";
 import TransportMode from "../Utils/TransportMode/TransportMode";
 import TransportSens from "../Utils/TransportSens/TransportSens";
-import FromTo from "../Utils/FromTo/FromTo";
 import AcknowledgeButton from "./AcknoledgeButton/AcknowledgeButton";
 
 interface IJobListItemViewProps {
@@ -26,9 +20,6 @@ interface IJobListItemViewProps {
 
 export default function JobListItemView(props: IJobListItemViewProps) {
   const { shortJob, onClickOnItem } = props;
-  const [isExpanded, setIsExpanded] = useState(false);
-
-  const toggleExpand = () => setIsExpanded((old) => !old);
 
   const handleOnClickOnItem = () => {
     if (!shortJob.isAck) return;
@@ -71,7 +62,7 @@ export default function JobListItemView(props: IJobListItemViewProps) {
             {!shortJob.isAck ? (
               <AcknowledgeButton icon jobId={shortJob.jobId} />
             ) : (
-              <ExpandIcon isExpanded={isExpanded} />
+              <ExpandIcon isExpanded={false} />
             )}
           </CardContent>
         </Box>

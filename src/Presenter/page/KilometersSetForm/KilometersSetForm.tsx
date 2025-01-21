@@ -3,45 +3,44 @@ import {
   Card,
   CardContent,
   CardHeader,
-  Divider,
   Typography,
-} from '@mui/material'
-import { useState } from 'react'
-import OutlinedTextField from '../../components/OutlinedTextField/OutlinedTextField'
-import ErrorHandler from '../../components/ErrorHandler/ErrorHandler'
-import { useMutation } from '@tanstack/react-query'
-import { setKilometers } from '../../../UseCase/KilometersUseCase/KilometersUseCase'
-import { getCrew } from '../../../DataSource/localStorage'
-import { useNavigate } from 'react-router-dom'
-import Kilometers from '../../components/Kilometers/Kilometers'
+} from "@mui/material";
+import { useState } from "react";
+import OutlinedTextField from "../../components/OutlinedTextField/OutlinedTextField";
+import ErrorHandler from "../../components/ErrorHandler/ErrorHandler";
+import { useMutation } from "@tanstack/react-query";
+import { setKilometers } from "../../../UseCase/KilometersUseCase/KilometersUseCase";
+import { getCrew } from "../../../DataSource/localStorage";
+import { useNavigate } from "react-router-dom";
+import Kilometers from "../../components/Kilometers/Kilometers";
 
 export default function KilometersSetForm() {
-  const [value, setvalue] = useState('')
+  const [value, setvalue] = useState("");
 
   const { mutateAsync, error, isPending } = useMutation({
     mutationFn: setKilometers,
-  })
+  });
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
-  const crew = getCrew()
+  const crew = getCrew();
 
   const submit = async () => {
     try {
-      await mutateAsync({ crewId: crew?.crewId, kilometers: value })
-      navigate('/')
+      await mutateAsync({ crewId: crew?.crewId, kilometers: value });
+      navigate("/");
     } catch (error) {}
-  }
+  };
 
   return (
     <Card
       sx={{
         my: 2,
-        maxWidth: '400px',
-        position: 'absolute',
-        left: '50%',
-        top: '30%',
-        transform: 'translate(-50%,-50%)',
+        maxWidth: "400px",
+        position: "absolute",
+        left: "50%",
+        top: "30%",
+        transform: "translate(-50%,-50%)",
       }}
       elevation={0}
     >
@@ -53,13 +52,13 @@ export default function KilometersSetForm() {
         }
       />
       <CardContent>
-        <Typography color={'blue'} variant="body1">
+        <Typography color={"blue"} variant="body1">
           {crew?.callSign} {crew?.vehicle}
         </Typography>
         <Typography variant="caption">Derniere saisie</Typography>
         <Kilometers />
         <OutlinedTextField
-          label={'Km'}
+          label={"Km"}
           inputMode="numeric"
           value={value}
           onChange={(e) => setvalue(e.target.value)}
@@ -74,12 +73,15 @@ export default function KilometersSetForm() {
         >
           Valider
         </Button>
-        <Button color="secondary" onClick={() => navigate('/')}>
+        <Button color="secondary" onClick={() => navigate("/")}>
           Skip
         </Button>
 
-        <ErrorHandler error={error} complementMsg='Veuillez entrer le kilometrage'/>
+        <ErrorHandler
+          error={error}
+          complementMsg="Veuillez entrer le kilometrage"
+        />
       </CardContent>
     </Card>
-  )
+  );
 }

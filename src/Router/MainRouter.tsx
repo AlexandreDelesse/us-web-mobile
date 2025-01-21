@@ -4,12 +4,11 @@ import Home from "../Presenter/page/Home/Home";
 import Page404 from "../Presenter/components/Page404/Page404";
 import JobDetail from "../Presenter/page/JobDetailNavigation/JobDetail/JobDetail";
 import JobEdit from "../Presenter/page/JobDetailNavigation/JobEdit/JobEdit";
-import SignatureView from "../Presenter/page/JobDetailNavigation/Signature/SignatureView";
 import JobDetailNavigation from "../Presenter/page/JobDetailNavigation/JobDetailNavigation";
-import CrewList from "../Presenter/page/CrewList/CrewList";
 import KilometersSetForm from "../Presenter/page/KilometersSetForm/KilometersSetForm";
 import PrivateRoute from "./PrivateRoute";
 import CrewListContainer from "../Components/CrewList/CrewListContainer";
+import SignatureContainer from "../Components/Signature/SignatureContainer";
 
 export const appRouter = createHashRouter([
   {
@@ -24,7 +23,7 @@ export const appRouter = createHashRouter([
           { index: true, element: <Navigate to={"detail"} replace /> },
           { path: "detail", element: <JobDetail /> },
           { path: "detailEditable", element: <JobEdit /> },
-          { path: "signature", element: <SignatureView /> },
+          { path: "signature", element: <SignatureContainer /> },
         ],
       },
 

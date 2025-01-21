@@ -1,5 +1,4 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import React from "react";
 import AckJobUseCase from "../../../../UseCase/AckJobUseCase/AckJobUseCase";
 import { AckJobCmd } from "../../../../UseCase/AckJobUseCase/AckJobCmd";
 

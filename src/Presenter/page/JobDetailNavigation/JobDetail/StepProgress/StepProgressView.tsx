@@ -1,9 +1,6 @@
 import {
-  Alert,
   Box,
   Button,
-  Card,
-  CardContent,
   Modal,
   Step,
   StepButton,
@@ -19,9 +16,6 @@ export default function StepProgressView() {
   const viewModel = StepProgressViewModel();
 
   const {
-    activeStep,
-    isError,
-    isLoading,
     steps,
     onStepClick,
     getStepDisplayLabel,
@@ -35,7 +29,6 @@ export default function StepProgressView() {
     canReset,
     handleResetStep,
     fetchError,
-    updateError,
   } = viewModel;
 
   const style = {

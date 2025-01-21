@@ -53,7 +53,7 @@ export default function DriverSwapViewModel() {
 
   const getNextDriver = (driverIndex: number) => {
     const nextDriverIndex = getNextDriverIndex(driverIndex);
-    return driverCollection.find((driver, index) => index == nextDriverIndex);
+    return driverCollection.find((driver, index) => index === nextDriverIndex);
   };
 
   const getNextDriverIndex = (currentIndex: number) => {

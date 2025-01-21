@@ -1,16 +1,7 @@
-import {
-  QueryClient,
-  useMutation,
-  useQuery,
-  useQueryClient,
-} from "@tanstack/react-query";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
 import ReactSignatureCanvas from "react-signature-canvas";
-import GetSignatureUseCase from "../../../../UseCase/GetSignatureUseCase/GetSignatureUseCase";
-import UpdateSignatureUseCase from "../../../../UseCase/UpdateSignatureUseCase/UpdateSignatureUseCase";
-import { SignatureCmd } from "../../../../DataSource/WebApi/Routes/SignatureRoute";
 import { apiGetSignature, webApi } from "../../../../DataSource/api";
 import { AxiosError } from "axios";
 
@@ -55,7 +46,7 @@ export default function SignatureViewModel() {
         else setError(err);
         setIsloading(false);
       });
-  }, [refresh]);
+  }, [refresh, id]);
 
   const saveSignature = async () => {
     if (!id) return;

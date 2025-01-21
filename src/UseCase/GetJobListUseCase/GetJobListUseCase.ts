@@ -1,4 +1,4 @@
-import { apiGetJobList, webApi } from "../../DataSource/api";
+import { webApi } from "../../DataSource/api";
 import { getCrew } from "../../DataSource/localStorage";
 
 export default function GetJobListUseCase() {

@@ -37,10 +37,10 @@ export default function useEmailsFormViewModel(props: InputProps) {
         index,
         msg: "Renseignez ou supprimez l'email",
       }))
-      .filter((el) => el.value == "");
+      .filter((el) => el.value === "");
     setEmailErrors(emptyEmailErrors);
     setValue(name, JSON.stringify(emails));
-  }, [emails]);
+  }, [emails, name, setValue]);
 
   const getError = (index: number) =>
     emailErrors.find((el, i) => el.index === index);

@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import { useContext } from "react";
 import GetJobListUseCase from "../../../UseCase/GetJobListUseCase/GetJobListUseCase";
 import { useQuery } from "@tanstack/react-query";
 import { ShortJob } from "../../../Domain/ShortJob";

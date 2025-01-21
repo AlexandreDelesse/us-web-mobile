@@ -14,7 +14,7 @@ export default function EditableBeneficiary(props: EditableBeneficiaryProps) {
   const toggleShow = () => setShow(!show);
 
   const onValueChanges = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
+    // const { name, value } = e.target;
   };
 
   const onSubmit = (beneficiary: any) => {};
