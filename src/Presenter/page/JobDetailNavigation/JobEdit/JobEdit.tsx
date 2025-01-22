@@ -37,7 +37,7 @@ export default function JobEdit() {
             type={field.type}
           />
         ))}
-      <Button disabled={isPending} onClick={handleOnSave}>
+      <Button disabled={isPending} variant="contained" onClick={handleOnSave}>
         Sauvegarder
       </Button>
     </Box>

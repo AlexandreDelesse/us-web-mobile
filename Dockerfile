@@ -12,6 +12,8 @@ RUN npm install
 # Copier le code source de l'application
 COPY . .
 
+ENV REACT_APP_API_PORT=8075
+
 # Construire l'application React
 RUN npm run build
 
