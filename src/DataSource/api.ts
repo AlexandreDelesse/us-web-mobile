@@ -8,8 +8,15 @@ import { DriverSwapQuery } from "../Domain/Queries/DriverSwapQuery";
 import { Signature } from "../Domain/Signature";
 import { WebApi } from "./WebApi/WebApi";
 
+const HOST =
+  process.env.REACT_APP_API_URL || "https://intranet.urgencesante.fr";
+const PORT = process.env.REACT_APP_API_PORT || 8090;
+const BASE_ROUTE = process.env.REACT_APP_API_BASE_ROTUE || "/api/";
+
+const BASE_URL = `${HOST}:${PORT}${BASE_ROUTE}`;
+
 const api = axios.create({
-  baseURL: "https://intranet.urgencesante.fr:8090/api",
+  baseURL: BASE_URL,
   timeout: 1000,
 });
 
