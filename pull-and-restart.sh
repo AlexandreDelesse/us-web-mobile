@@ -25,7 +25,7 @@ fi
 
 # Étape 3 : Lancer un nouveau conteneur avec la nouvelle image
 echo "Démarrage d'un nouveau conteneur avec l'image mise à jour..."
-docker run -d -p "$PORT_MAPPING" --name "$CONTAINER_NAME" "$IMAGE_NAME:$IMAGE_TAG"
+docker run -d -p "$PORT_MAPPING" -e REACT_APP_API_PORT=8080 --name "$CONTAINER_NAME" "$ :$IMAGE_TAG"
 
 # Étape 4 : Vérifier que le conteneur est en cours d'exécution
 echo "Vérification de l'état du conteneur..."
