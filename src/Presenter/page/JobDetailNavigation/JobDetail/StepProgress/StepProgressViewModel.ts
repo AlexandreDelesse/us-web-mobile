@@ -96,9 +96,9 @@ export default function StepProgressViewModel() {
   const getStepDisplayLabel = (label: string) => {
     switch (label) {
       case "go":
-        return "En route";
+        return "En charge";
       case "onSite":
-        return "Sur place";
+        return "A destination";
       case "available":
         return "Dispo";
       default:

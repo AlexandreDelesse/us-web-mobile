@@ -1,9 +1,9 @@
-import JobEditViewModel from "./JobEditViewModel";
-import FormFactory from "./FormFactory/FormFactory";
-import { Box, Button } from "@mui/material";
-import { FieldInfos } from "../../../../Domain/FormStructure";
-import ErrorHandler from "../../../components/ErrorHandler/ErrorHandler";
-import LogoLoader from "../../../../SharedComponents/LogoLoader";
+import JobEditViewModel from './JobEditViewModel'
+import FormFactory from './FormFactory/FormFactory'
+import { Box, Button } from '@mui/material'
+import { FieldInfos } from '../../../../Domain/FormStructure'
+import ErrorHandler from '../../../components/ErrorHandler/ErrorHandler'
+import LogoLoader from '../../../../SharedComponents/LogoLoader'
 
 export default function JobEdit() {
   const {
@@ -15,16 +15,16 @@ export default function JobEdit() {
     onValueChanges,
     data,
     isPending,
-  } = JobEditViewModel();
+  } = JobEditViewModel()
 
-  if (isLoading || isRefetching) return <LogoLoader />;
+  if (isLoading || isRefetching) return <LogoLoader />
 
-  if (!data) return <div>No data yet</div>;
+  if (!data) return <div>No data yet</div>
 
-  if (error) return <ErrorHandler error={error} />;
+  if (error) return <ErrorHandler error={error} />
 
   return (
-    <Box>
+    <Box sx={{ marginBottom: 7 }}>
       {fields
         .sort((a, b) => a.index - b.index)
         .map((field: FieldInfos) => (
@@ -41,5 +41,5 @@ export default function JobEdit() {
         Sauvegarder
       </Button>
     </Box>
-  );
+  )
 }
