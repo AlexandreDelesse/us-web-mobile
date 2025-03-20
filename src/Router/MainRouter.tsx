@@ -9,13 +9,31 @@ import KilometersSetForm from "../Presenter/page/KilometersSetForm/KilometersSet
 import PrivateRoute from "./PrivateRoute";
 import CrewListContainer from "../Components/CrewList/CrewListContainer";
 import SignatureContainer from "../Components/Signature/SignatureContainer";
+import { Box } from "@mui/material";
+import SwitchButton from "../Presenter/components/SwitchButton/SwitchButton";
+import DriverSwapView from "../Presenter/components/DriverSwap/views/DriverSwapView";
+import JobList from "../Presenter/components/JobList/JobList";
+import MainPage from "../Components/Pages/MainPage";
+import MissionsPage from "../Components/Pages/MissionsPage";
+import MecanicLogs from "../Components/Mecanic/MecanicLogs";
 
 export const appRouter = createHashRouter([
   {
     path: "/",
-    element: <PrivateRoute />,
+    element: <MainPage />,
     children: [
-      { path: "/", element: <Home /> },
+      {
+        path: "/",
+        element: <Home />,
+        children: [
+          {
+            index: true,
+            element: <MissionsPage />,
+          },
+          { path: "/vehicle", element: <MecanicLogs /> },
+        ],
+      },
+
       {
         path: "/jobs/:id/*",
         element: <JobDetailNavigation />,

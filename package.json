@@ -1,7 +1,7 @@
 {
   "name": "urgence-sante-jobs-client",
   "version": "0.2.5",
-  "versionName": "beta",
+  "versionName": "dev",
   "private": true,
   "dependencies": {
     "@emotion/react": "^11.11.4",
