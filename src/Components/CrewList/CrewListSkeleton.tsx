@@ -1,9 +1,9 @@
-import { Grid, Skeleton } from "@mui/material";
-import React from "react";
+import { Grid, Skeleton } from '@mui/material'
+import React from 'react'
 
 export default function CrewListSkeleton() {
   return (
-    <Grid container spacing={1}>
+    <Grid container padding={2}>
       <Grid item xs={12} sm={6} lg={4}>
         <Skeleton
           sx={{ marginY: 1 }}
@@ -25,5 +25,5 @@ export default function CrewListSkeleton() {
         />
       </Grid>
     </Grid>
-  );
+  )
 }

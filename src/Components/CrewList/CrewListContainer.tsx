@@ -7,6 +7,7 @@ import ErrorHandler from '../../Presenter/components/ErrorHandler/ErrorHandler'
 import { AxiosError } from 'axios'
 import { useNavigate } from 'react-router-dom'
 import SearchBarView from './SearchBarView'
+import { Box } from '@mui/material'
 
 export default function CrewListContainer() {
   const [crews, setCrews] = useState<ICrew[]>([])
@@ -40,10 +41,10 @@ export default function CrewListContainer() {
   if (error) return <ErrorHandler error={error} />
 
   return (
-    <>
+    <Box padding={2}>
       <SearchBarView onSearch={onSearch} />
       {/* <TestCrewListView crews={crews} /> */}
       <CrewListView crews={crews} onMemberClick={onMemberClick} />
-    </>
+    </Box>
   )
 }
