@@ -1,45 +1,62 @@
-import React, { useEffect, useState } from "react";
-import { getMecanicLogs } from "../../Services/MecanicService";
-import { useParams } from "react-router-dom";
-import { getCrew } from "../../DataSource/localStorage";
-import { MecanicLog } from "./MecanicLog";
-import { Alert, AlertTitle, Box, Card, Typography } from "@mui/material";
+import { useEffect, useState } from 'react'
+import { getMecanicLogs } from '../../Services/MecanicService'
+import { getCrew } from '../../DataSource/localStorage'
+import { MecanicLog } from './MecanicLog'
+import { Alert, AlertTitle, Box, Typography } from '@mui/material'
+import MecanicLogForm from './MecanicLogForm'
 
 export default function MecanicLogs() {
-  const [mecanicLogs, setMecanicLogs] = useState<MecanicLog[]>([]);
-  const crew = getCrew();
+  const [mecanicLogs, setMecanicLogs] = useState<MecanicLog[]>([])
+  const [refresh, setRefresh] = useState(false)
+  const crew = getCrew()
 
   useEffect(() => {
-    if (!crew) return;
-    getMecanicLogs(crew.crewId).then((data) => setMecanicLogs(data));
-  }, []);
+    if (!crew) return
+    getMecanicLogs(crew.crewId).then((data) => setMecanicLogs(data))
+  }, [refresh])
 
   const mecanicLogList = (
-    <Box sx={{ display: "flex", flexDirection: "column", gap: 1 }}>
+    <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1 }}>
       {mecanicLogs.map((mecanicLog) => (
-        <Alert severity={getLogStatus(mecanicLog.statut)} key={mecanicLog.id}>
+        <Alert severity={getLogStatus(mecanicLog.state)} key={mecanicLog.id}>
           <AlertTitle>
-            {new Date(mecanicLog.declaredDate).toLocaleDateString()}
+            {new Date(mecanicLog.lastStateDate).toLocaleDateString()}
           </AlertTitle>
           {mecanicLog.constat}
         </Alert>
       ))}
     </Box>
-  );
+  )
+
+  const emptyListComponent = (
+    <Box>
+      <Typography marginY={4} textAlign="center">
+        Aucun incident en cours
+      </Typography>
+    </Box>
+  )
 
   return (
     <Box>
-      <Typography sx={{ my: 1 }}>Problèmes signalés</Typography>
-      {mecanicLogList}
+      <MecanicLogForm refresh={() => setRefresh(!refresh)} />
+      <Typography variant="h5" fontSize={18} sx={{ my: 1 }}>
+        Incidents en cours
+      </Typography>
+      {mecanicLogs.length < 1 ? emptyListComponent : mecanicLogList}
     </Box>
-  );
+  )
 }
 
-const getLogStatus = (logStatus: string) => {
+const getLogStatus = (logStatus: number) => {
   switch (logStatus) {
-    case "Nouveaux":
-      return "warning";
+    case 1:
+      return 'warning'
+    case 2:
+      return 'info'
+    case 3:
+      return 'success'
+
     default:
-      return "info";
+      return 'info'
   }
-};
+}

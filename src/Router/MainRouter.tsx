@@ -1,55 +1,50 @@
-import { Navigate, createHashRouter } from "react-router-dom";
-import UserLoginView from "../Presenter/page/UserLogin/UserLoginView";
-import Home from "../Presenter/page/Home/Home";
-import Page404 from "../Presenter/components/Page404/Page404";
-import JobDetail from "../Presenter/page/JobDetailNavigation/JobDetail/JobDetail";
-import JobEdit from "../Presenter/page/JobDetailNavigation/JobEdit/JobEdit";
-import JobDetailNavigation from "../Presenter/page/JobDetailNavigation/JobDetailNavigation";
-import KilometersSetForm from "../Presenter/page/KilometersSetForm/KilometersSetForm";
-import PrivateRoute from "./PrivateRoute";
-import CrewListContainer from "../Components/CrewList/CrewListContainer";
-import SignatureContainer from "../Components/Signature/SignatureContainer";
-import { Box } from "@mui/material";
-import SwitchButton from "../Presenter/components/SwitchButton/SwitchButton";
-import DriverSwapView from "../Presenter/components/DriverSwap/views/DriverSwapView";
-import JobList from "../Presenter/components/JobList/JobList";
-import MainPage from "../Components/Pages/MainPage";
-import MissionsPage from "../Components/Pages/MissionsPage";
-import MecanicLogs from "../Components/Mecanic/MecanicLogs";
+import { Navigate, createHashRouter } from 'react-router-dom'
+import UserLoginView from '../Presenter/page/UserLogin/UserLoginView'
+import Home from '../Presenter/page/Home/Home'
+import Page404 from '../Presenter/components/Page404/Page404'
+import JobDetail from '../Presenter/page/JobDetailNavigation/JobDetail/JobDetail'
+import JobEdit from '../Presenter/page/JobDetailNavigation/JobEdit/JobEdit'
+import JobDetailNavigation from '../Presenter/page/JobDetailNavigation/JobDetailNavigation'
+import KilometersSetForm from '../Presenter/page/KilometersSetForm/KilometersSetForm'
+import CrewListContainer from '../Components/CrewList/CrewListContainer'
+import SignatureContainer from '../Components/Signature/SignatureContainer'
+import MainPage from '../Components/Pages/MainPage'
+import MissionsPage from '../Components/Pages/MissionsPage'
+import MecanicLogs from '../Components/Mecanic/MecanicLogs'
 
 export const appRouter = createHashRouter([
   {
-    path: "/",
+    path: '/',
     element: <MainPage />,
     children: [
       {
-        path: "/",
+        path: '/',
         element: <Home />,
         children: [
           {
             index: true,
             element: <MissionsPage />,
           },
-          { path: "/vehicle", element: <MecanicLogs /> },
+          { path: '/vehicle', element: <MecanicLogs /> },
         ],
       },
 
       {
-        path: "/jobs/:id/*",
+        path: '/jobs/:id/*',
         element: <JobDetailNavigation />,
         children: [
-          { index: true, element: <Navigate to={"detail"} replace /> },
-          { path: "detail", element: <JobDetail /> },
-          { path: "detailEditable", element: <JobEdit /> },
-          { path: "signature", element: <SignatureContainer /> },
+          { index: true, element: <Navigate to={'detail'} replace /> },
+          { path: 'detail', element: <JobDetail /> },
+          { path: 'detailEditable', element: <JobEdit /> },
+          { path: 'signature', element: <SignatureContainer /> },
         ],
       },
 
-      { path: "kilometers", element: <KilometersSetForm /> },
-      { path: "regul", element: <CrewListContainer /> },
+      { path: 'kilometers', element: <KilometersSetForm /> },
+      { path: 'regul', element: <CrewListContainer /> },
     ],
   },
-  { path: "login", element: <UserLoginView /> },
-  { path: "login/:crewId/:memberName", element: <UserLoginView /> },
-  { path: "/*", element: <Page404 /> },
-]);
+  { path: 'login', element: <UserLoginView /> },
+  { path: 'login/:crewId/:memberName', element: <UserLoginView /> },
+  { path: '/*', element: <Page404 /> },
+])

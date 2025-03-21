@@ -1,25 +1,28 @@
-import { BottomNavigation, BottomNavigationAction, Paper } from "@mui/material";
-import React, { useState } from "react";
-import AssignmentIcon from "@mui/icons-material/Assignment";
-import TaxiAlertIcon from "@mui/icons-material/TaxiAlert";
-import { useNavigate } from "react-router-dom";
+import { BottomNavigation, BottomNavigationAction, Paper } from '@mui/material'
+import React, { useState } from 'react'
+import AssignmentIcon from '@mui/icons-material/Assignment'
+import TaxiAlertIcon from '@mui/icons-material/TaxiAlert'
+import { useLocation, useNavigate, useParams } from 'react-router-dom'
 
 export default function MainBottomNavigation() {
-  const [value, setValue] = useState(0);
+  const location = useLocation()
 
-  const navigate = useNavigate();
+  // ATTENTION TRES CRADO A MODIFIER !!
+  const [value, setValue] = useState(location.pathname === '/' ? 0 : 1)
+
+  const navigate = useNavigate()
 
   const onChange = (event: React.SyntheticEvent, newValue: any) => {
-    setValue(newValue);
-    const link = getTabLink(newValue);
-    navigate(link);
-  };
+    setValue(newValue)
+    const link = getTabLink(newValue)
+    navigate(link)
+  }
 
   return (
     <Paper
       sx={{
         zIndex: 1000,
-        position: "sticky",
+        position: 'sticky',
         bottom: 0,
         left: 0,
         right: 0,
@@ -32,16 +35,16 @@ export default function MainBottomNavigation() {
         <BottomNavigationAction label="Véhicule" icon={<TaxiAlertIcon />} />
       </BottomNavigation>
     </Paper>
-  );
+  )
 }
 
 const getTabLink = (tabIndex: number) => {
   switch (tabIndex) {
     case 0:
-      return "/";
+      return '/'
     case 1:
-      return "vehicle";
+      return 'vehicle'
     default:
-      return "/";
+      return '/'
   }
-};
+}

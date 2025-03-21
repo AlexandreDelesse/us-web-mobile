@@ -1,7 +1,4 @@
 import { Box } from "@mui/material";
-import DriverSwapView from "../../components/DriverSwap/views/DriverSwapView";
-import JobList from "../../components/JobList/JobList";
-import SwitchButton from "../../components/SwitchButton/SwitchButton";
 import MainBottomNavigation from "../../../Components/Navigation/MainBottomNavigation";
 import { Outlet } from "react-router-dom";
 
