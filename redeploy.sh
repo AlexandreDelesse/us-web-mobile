@@ -6,13 +6,13 @@ set -e
 ENV=$1
 VERSION=$2
 
-if [[ -z "$ENV" || -z "$VERSION" ]]; then
+if [ -z "$ENV" ] || [ -z "$VERSION" ]; then
   echo "Usage: $0 [dev|beta|prod] [version|latest]"
   exit 1
 fi
 
 # Définir les tags selon la version
-if [[ "$VERSION" == "latest" ]]; then
+if [ "$VERSION" = "latest" ]; then
   IMAGE_TAG="latest-${ENV}"
 else
   IMAGE_TAG="v${VERSION}-${ENV}"
