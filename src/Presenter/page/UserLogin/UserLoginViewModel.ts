@@ -24,6 +24,7 @@ export default function UserLoginViewModel() {
 
   const submit = async () => {
     if (name === "regul" && code === "1234") return navigate("/regul");
+    if (name === "admin" && code === "4321") return navigate("/administration");
     else
       mutate({
         id: parseInt(code),

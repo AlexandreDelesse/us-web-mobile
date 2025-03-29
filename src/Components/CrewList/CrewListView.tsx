@@ -16,7 +16,7 @@ export default function CrewListView(props: CrewListViewProps) {
       </Typography>
       <Grid container spacing={1}>
         {crews.map((crew) => (
-          <Grid key={crew.crewId} item xs={12} sm={6} lg={4}>
+          <Grid key={crew.crewId} item xs={12} sm={6} lg={3}>
             <Card elevation={0} sx={{ backgroundColor: "whitesmoke" }}>
               <CardHeader
                 title={crew.immat}

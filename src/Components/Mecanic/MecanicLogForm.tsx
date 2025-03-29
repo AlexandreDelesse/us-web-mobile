@@ -2,7 +2,7 @@ import { Button, TextField } from '@mui/material'
 import { Box } from '@mui/system'
 import React, { useState } from 'react'
 import SendIcon from '@mui/icons-material/Send'
-import { sendMecanicLog } from '../../Services/MecanicService'
+import { sendMecanicLog } from '../../Services/mecanic.service'
 import { getCrew } from '../../DataSource/localStorage'
 import CarCrashIcon from '@mui/icons-material/CarCrash'
 

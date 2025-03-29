@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { getMecanicLogs } from '../../Services/MecanicService'
+import { getMecanicLogsByCrewId } from '../../Services/mecanic.service'
 import { getCrew } from '../../DataSource/localStorage'
 import { MecanicLog } from './MecanicLog'
 import { Alert, AlertTitle, Box, Typography } from '@mui/material'
@@ -12,7 +12,7 @@ export default function MecanicLogs() {
 
   useEffect(() => {
     if (!crew) return
-    getMecanicLogs(crew.crewId).then((data) => setMecanicLogs(data))
+    getMecanicLogsByCrewId(crew.crewId).then((data) => setMecanicLogs(data))
   }, [refresh])
 
   const mecanicLogList = (

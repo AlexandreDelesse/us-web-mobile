@@ -6,8 +6,10 @@ export default function PrivateRoute() {
   const navigate = useNavigate();
   const location = useLocation();
 
+  const acceptedPaths = ["/regul", "/administration"];
+
   useEffect(() => {
-    if (location.pathname === "/regul") return;
+    if (acceptedPaths.some((el) => el.includes(location.pathname))) return;
     const crew = getCrew();
     if (!crew) navigate("/login", { replace: true });
   }, [navigate, location.pathname]);

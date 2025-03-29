@@ -17,7 +17,7 @@ export default function SearchBarView(props: SearchBarViewProps) {
 
   return (
     <TextField
-      sx={{ marginY: 1 }}
+      sx={{ marginY: 1, width: {xs: "100%", lg: 350} }}
       value={searchValue}
       onChange={onValueChanges}
       placeholder="Recherche par Imamt/Callsign/Membre"
