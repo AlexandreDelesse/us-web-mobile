@@ -24,13 +24,13 @@ CONTAINER_NAME="us-client-${ENV}"
 # Définir le port en fonction de l'environnement
 case "$ENV" in
   dev)
-    PORT_MAPPING="3012:80"
+    PORT_MAPPING="3010:80"
     ;;
   beta)
-    PORT_MAPPING="3013:80"
+    PORT_MAPPING="3011:80"
     ;;
   prod)
-    PORT_MAPPING="3014:80"
+    PORT_MAPPING="3012:80"
     ;;
   *)
     echo "❌ Environnement inconnu : $ENV"
