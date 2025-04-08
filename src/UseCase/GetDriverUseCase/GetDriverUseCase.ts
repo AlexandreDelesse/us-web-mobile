@@ -7,7 +7,6 @@ export default function GetDriverUseCase(): UseCase<DriverSwapQuery, any> {
   const execute = async () => {
     try {
       const crew = getCrew();
-      console.log(crew);
       if (!crew) throw new Error("Veuillez vous connecter !");
       const response = await apiGetDriver(crew.crewId);
       return response;

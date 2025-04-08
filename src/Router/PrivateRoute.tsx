@@ -7,12 +7,15 @@ export default function PrivateRoute() {
   const location = useLocation();
 
   const acceptedPaths = ["/regul", "/administration"];
+  const isPublicPath = acceptedPaths.some((el) => el == location.pathname);
 
   useEffect(() => {
-    if (acceptedPaths.some((el) => el.includes(location.pathname))) return;
+    console.log("checking public path : ", isPublicPath);
+    if (isPublicPath) return;
     const crew = getCrew();
+    console.log("checking crew in privateRoute", crew);
     if (!crew) navigate("/login", { replace: true });
-  }, [navigate, location.pathname]);
+  }, [navigate, location.pathname, isPublicPath]);
 
   return <Outlet />;
 }

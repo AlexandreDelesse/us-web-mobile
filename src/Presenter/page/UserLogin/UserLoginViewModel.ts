@@ -14,7 +14,6 @@ export default function UserLoginViewModel() {
 
   useEffect(() => {
     let crew = getCrew();
-    console.log(crew);
     if (crew) navigate("/");
   }, [navigate]);
 

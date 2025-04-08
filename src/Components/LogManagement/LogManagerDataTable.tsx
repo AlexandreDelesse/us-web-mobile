@@ -79,7 +79,6 @@ export default function LogManagerDataTable() {
     constat: log.constat,
   }));
 
-  console.log(request.data);
   return (
     <Paper sx={{ height: "100%" }}>
       <DataGrid

@@ -18,7 +18,6 @@ export default function LogManager() {
   if (request.isLoading) return <div>Request loading</div>;
   if (request.isError) return <div>An Error occured</div>;
 
-  console.log(request.data);
   return (
     <TableContainer component={Paper}>
       <Table>
