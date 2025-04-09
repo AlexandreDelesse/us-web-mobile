@@ -42,7 +42,9 @@ export default function AsyncSelect(props: AsyncSelectProps) {
         onChange={handleIdChanges}
       >
         {req.data.map((el: RequestAction) => (
-          <MenuItem value={el.id}>{el.value}</MenuItem>
+          <MenuItem key={el.id} value={el.id}>
+            {el.value}
+          </MenuItem>
         ))}
       </Select>
     </FormControl>
