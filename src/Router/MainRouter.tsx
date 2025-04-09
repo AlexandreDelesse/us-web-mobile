@@ -12,6 +12,7 @@ import MainPage from "../Components/Pages/MainPage";
 import MissionsPage from "../Components/Pages/MissionsPage";
 import MecanicLogs from "../Components/Mecanic/MecanicLogs";
 import LogManagerPage from "../Components/Pages/LogManagerPage";
+import LogDetailPage from "../Components/Pages/LogDetailPage";
 
 export const appRouter = createHashRouter([
   {
@@ -44,9 +45,10 @@ export const appRouter = createHashRouter([
       { path: "kilometers", element: <KilometersSetForm /> },
       { path: "regul", element: <CrewListContainer /> },
       {
-        path: "administration",
+        path: "logs",
         element: <LogManagerPage />,
       },
+      { path: "logs/:logId", element: <LogDetailPage /> },
     ],
   },
   { path: "login", element: <UserLoginView /> },

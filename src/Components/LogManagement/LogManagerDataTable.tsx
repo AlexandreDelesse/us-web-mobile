@@ -24,11 +24,14 @@ import DateFormatter from "../../Presenter/components/DateFormatter/DateFormatte
 import DateDisplayer from "../Shared/DateDisplayer";
 import LogoLoader from "../../SharedComponents/LogoLoader";
 import ErrorHandler from "../../Presenter/components/ErrorHandler/ErrorHandler";
-import AssignmentTurnedInIcon from "@mui/icons-material/AssignmentTurnedIn";
-import DirectionsBoatFilledIcon from "@mui/icons-material/DirectionsBoatFilled";
+import SettingsIcon from "@mui/icons-material/Settings";
+import { useNavigate } from "react-router-dom";
 
 export default function LogManagerDataTable() {
   const request = useRequest(["logManager"], getLogManager);
+  const navigate = useNavigate();
+
+  const handleNavigate = (log: any) => navigate(`/logs/${log.id}`);
 
   const columns: GridColDef[] = [
     { field: "id", headerName: "LogId" },
@@ -51,17 +54,10 @@ export default function LogManagerDataTable() {
       width: 100,
       getActions: (params) => [
         <GridActionsCellItem
-          icon={<AssignmentTurnedInIcon />}
+          icon={<SettingsIcon color="action" />}
           label="Voir"
           color="success"
-          onClick={() => alert("Une action")}
-          showInMenu={false}
-        />,
-        <GridActionsCellItem
-          icon={<DirectionsBoatFilledIcon />}
-          color="primary"
-          label="Supprimer"
-          onClick={() => alert("Une autre action")}
+          onClick={() => handleNavigate(params.row)}
           showInMenu={false}
         />,
       ],
