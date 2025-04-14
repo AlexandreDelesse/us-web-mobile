@@ -16,7 +16,7 @@ export default function JobDetail() {
   //TODO: Factoriser les composants graphiques
   //TODO: Refaire propre et implementer stepper
   return (
-    <Box>
+    <Box sx={{marginBottom: 5}}>
       <EditableBeneficiary beneficiary={jobDetail.beneficiary} />
       <Typography variant="body1" sx={{ marginBottom: 1 }}>
         Né le {jobDetail.beneficiary.ddn} - {jobDetail.beneficiary.age}
