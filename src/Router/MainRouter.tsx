@@ -13,6 +13,7 @@ import MissionsPage from "../Components/Pages/MissionsPage";
 import MecanicLogs from "../Components/Mecanic/MecanicLogs";
 import LogManagerPage from "../Components/Pages/LogManagerPage";
 import LogDetailPage from "../Components/Pages/LogDetailPage";
+import VersionDisplayerView from "../Presenter/components/VersionDisplayer/VersionDisplayerView";
 
 export const appRouter = createHashRouter([
   {
@@ -51,7 +52,21 @@ export const appRouter = createHashRouter([
       { path: "logs/:logId", element: <LogDetailPage /> },
     ],
   },
-  { path: "login", element: <UserLoginView /> },
-  { path: "login/:crewId/:memberName", element: <UserLoginView /> },
+  {
+    path: "login",
+    element: (
+      <>
+        <UserLoginView /> <VersionDisplayerView cornerBottom={true} />
+      </>
+    ),
+  },
+  {
+    path: "login/:crewId/:memberName",
+    element: (
+      <>
+        <UserLoginView /> <VersionDisplayerView cornerBottom={true} />
+      </>
+    ),
+  },
   { path: "/*", element: <Page404 /> },
 ]);

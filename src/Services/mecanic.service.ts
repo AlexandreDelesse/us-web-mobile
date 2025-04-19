@@ -1,3 +1,4 @@
+import { Log } from "../Components/LogManagement/Log";
 import { api } from "./api.service";
 
 const getMecanicLogsByCrewId = async (crewId: number) => {
@@ -18,7 +19,7 @@ const sendMecanicLog = async (crewId: number, constat: string) => {
   }
 };
 
-const getLogManager = async () => {
+const getLogManager = async (): Promise<Log[]> => {
   try {
     const request = await api.get("LogManager");
     return request.data;
@@ -27,4 +28,20 @@ const getLogManager = async () => {
   }
 };
 
-export { getMecanicLogsByCrewId, sendMecanicLog, getLogManager };
+const getLogFromLogManager = async (id: string | null) => {
+  try {
+    if (!id) throw new Error("l'ID n'existe pas.");
+
+    const req = await getLogManager();
+    return req.find((el) => el.logId === parseInt(id));
+  } catch (error) {
+    throw error;
+  }
+};
+
+export {
+  getMecanicLogsByCrewId,
+  sendMecanicLog,
+  getLogManager,
+  getLogFromLogManager,
+};

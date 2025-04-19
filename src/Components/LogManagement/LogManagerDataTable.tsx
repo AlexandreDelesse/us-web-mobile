@@ -78,6 +78,7 @@ export default function LogManagerDataTable() {
   return (
     <Paper sx={{ height: "100%" }}>
       <DataGrid
+        sx={{ border: "none", boxShadow: "none" }}
         rows={rows}
         columns={columns}
         slots={{

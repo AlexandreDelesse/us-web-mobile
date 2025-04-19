@@ -3,6 +3,7 @@ import UserLoginViewModel from "./UserLoginViewModel";
 import OutlinedTextField from "../../components/OutlinedTextField/OutlinedTextField";
 import ErrorHandler from "../../components/ErrorHandler/ErrorHandler";
 import React from "react";
+import VersionDisplayerView from "../../components/VersionDisplayer/VersionDisplayerView";
 
 export default function UserLoginView() {
   const { code, name, setCode, setName, submit, isPending, error } =

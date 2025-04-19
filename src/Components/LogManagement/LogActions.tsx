@@ -23,13 +23,29 @@ export default function LogActions() {
 
   const handleAddAction = () => {
     if (hasEmptyAction()) return;
-    setActions((old) => [...old, { ActionTypeId: undefined }]);
+    // setActions((old) => [...old, { ActionTypeId: undefined }]);
   };
 
-  const handleDeleteAction = (id: string) => alert("Pas encore implémenté");
+  const handleDeleteAction = (index: number) => {
+    console.log(actions, index);
+    setActions((old) => old.filter((action, i) => i !== index));
+  };
 
   const hasEmptyAction = () => actions.some((action) => isActionEmpty(action));
   const isActionEmpty = (action: Action) => !!action.ActionTypeId;
+
+  const handleOnChanges = (index: number, field: string, value: string) => {
+    console.log(field, value);
+    setActions((old) =>
+      old.map((action, i) =>
+        i === index ? { ...action, [field]: value } : action
+      )
+    );
+  };
+
+  const handleOnSave = () => {
+    console.log("Action to send", actions);
+  };
 
   return (
     <Box
@@ -44,30 +60,49 @@ export default function LogActions() {
       </Typography>
       <Box sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
         {actions.map((action, index) => (
-          <ActionForm onDelete={handleDeleteAction} key={index} />
+          <ActionForm
+            onChange={handleOnChanges}
+            onDelete={handleDeleteAction}
+            key={index}
+            index={index}
+          />
         ))}
       </Box>
-      <Button
-        onClick={handleAddAction}
-        sx={{ marginTop: 2 }}
-        startIcon={<AddIcon />}
-      >
-        Ajouter une action
-      </Button>
+      <Box sx={{ display: "flex", flexDirection: "column", width: 200 }}>
+        <Button
+          onClick={handleAddAction}
+          sx={{ marginTop: 2 }}
+          startIcon={<AddIcon />}
+        >
+          Ajouter une action
+        </Button>
+      </Box>
     </Box>
   );
 }
 
-export function ActionForm(props: { onDelete: (id: string) => void }) {
+interface ActionFormProps {
+  onDelete: (id: number) => any;
+  index: number;
+  onChange: (index: number, field: string, value: string) => any;
+}
+export function ActionForm(props: ActionFormProps) {
   return (
     <Box sx={{ display: "flex", gap: 1 }}>
-      <TextField size="small" label="Description" />
+      <TextField
+        size="small"
+        label="Description"
+        name="description"
+        onChange={(e) =>
+          props.onChange(props.index, e.target.name, e.target.value)
+        }
+      />
       <NatureSelect />
       <ConcerningSelect />
       <ActionSelect />
-      <ActorSelect />
+      <ActorSelect onChange={props.onChange} index={props.index} />
       <ConstraintSelect />
-      <IconButton onClick={() => props.onDelete}>
+      <IconButton onClick={() => props.onDelete(props.index)}>
         <DeleteIcon color="error" />
       </IconButton>
     </Box>
