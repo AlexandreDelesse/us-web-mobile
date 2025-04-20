@@ -4,13 +4,18 @@ import { getReferenceConcerning } from "../../../Services/referenceData.service"
 
 import AsyncSelect from "./AsyncSelect";
 
-export default function ConcerningSelect() {
+interface ConcerningSelectProps {
+  value: string;
+  onChange: (value: string) => any;
+}
+export default function ConcerningSelect(props: ConcerningSelectProps) {
   const req = useRequest(["reference", "concerning"], getReferenceConcerning);
-  const [id, setId] = useState("");
 
-  const handleActionChanges = (id: string) => setId(id);
+  const handleActionChanges = (id: string) => {
+    props.onChange(id);
+  };
 
   return (
-    <AsyncSelect label="Concerne" req={req} onChange={handleActionChanges} />
+    <AsyncSelect value={props.value} label="Concerne"  req={req} onChange={handleActionChanges} />
   );
 }

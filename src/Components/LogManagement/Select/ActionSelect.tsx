@@ -11,6 +11,6 @@ export default function ActionSelect() {
   const handleActionChanges = (id: string) => setActionId(id);
 
   return (
-    <AsyncSelect label="Action" req={req} onChange={handleActionChanges} />
+    <AsyncSelect value={actionId} label="Action" req={req} onChange={handleActionChanges} />
   );
 }

@@ -25,16 +25,16 @@ api.interceptors.response.use(
   }
 );
 
-apiWithoutBase.interceptors.response.use(
-  (response) => {
-    // Transformer les données reçues
-    response.data = toCamelCaseKeys(response.data);
-    return response;
-  },
-  (error) => {
-    // Gérer les erreurs ici aussi si besoin
-    return Promise.reject(error);
-  }
-);
+// apiWithoutBase.interceptors.response.use(
+//   (response) => {
+//     // Transformer les données reçues
+//     response.data = toCamelCaseKeys(response.data);
+//     return response;
+//   },
+//   (error) => {
+//     // Gérer les erreurs ici aussi si besoin
+//     return Promise.reject(error);
+//   }
+// );
 
 export { api, apiWithoutBase };

@@ -17,6 +17,6 @@ export default function ActorSelect(props: ActorSelectProps) {
   useEffect(() => props.onChange(props.index, "ActorId", id.toString()), [id]);
 
   return (
-    <AsyncSelect label="Acteur" req={req} onChange={handleActionChanges} />
+    <AsyncSelect value={id} label="Acteur" req={req} onChange={handleActionChanges} />
   );
 }

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Analyse, analyseInfos } from "../LogManagement/Analyse";
 import {
   Box,
@@ -9,6 +9,8 @@ import {
   Typography,
 } from "@mui/material";
 import { CheckBox } from "@mui/icons-material";
+import ConcerningSelect from "../LogManagement/Select/ConcerningSelect";
+import NatureSelect from "../LogManagement/Select/NatureSelect";
 
 const emptyAnalyseInfos = {
   Analyze: "",
@@ -20,18 +22,16 @@ const emptyAnalyseInfos = {
 };
 
 interface AnalyseResumeFormProps {
-  analyseInfos?: analyseInfos;
+  analyse: Analyse;
   onChange: (name: keyof Analyse, value: any) => void;
 }
 export default function AnalyseResumeForm(props: AnalyseResumeFormProps) {
-  const { analyseInfos } = props;
+  const { analyse } = props;
 
-  const [formData, setFormData] = useState<analyseInfos>(
-    analyseInfos || emptyAnalyseInfos
-  );
+  useEffect(() => console.log(analyse), [analyse]);
 
   const changeFormData = (name: keyof analyseInfos, value: any) => {
-    setFormData((old) => ({ ...old, [name]: value }));
+    // setFormData((old) => ({ ...old, [name]: value }));
     props.onChange(name, value);
   };
 
@@ -40,22 +40,34 @@ export default function AnalyseResumeForm(props: AnalyseResumeFormProps) {
       <Typography marginY={1} variant="h6">
         Analyse
       </Typography>
-      <FormGroup>
+      <FormGroup sx={{ gap: 2 }}>
         <FormControlLabel
           control={
             <Switch
-              checked={formData.ImmobilizeVehicle}
+              checked={analyse.ImmobilizeVehicle}
               onChange={() =>
-                changeFormData("ImmobilizeVehicle", !formData.ImmobilizeVehicle)
+                changeFormData("ImmobilizeVehicle", !analyse.ImmobilizeVehicle)
               }
             />
           }
           label="Immobilisation du véhicule nécessaire"
         />
+        <Box sx={{ display: "flex", gap: 2, width: "100%" }}>
+          <ConcerningSelect
+            value={analyse.Concerning.toString()}
+            onChange={(id: string) => changeFormData("Concerning", id)}
+          />
+          <NatureSelect
+            value={analyse.Nature.toString()}
+            onChange={(id: string) => changeFormData("Nature", id)}
+          />
+        </Box>
+
         <TextField
           multiline
           rows={4}
           label="Analyse"
+          value={analyse.Analyze}
           onChange={(e) => changeFormData("Analyze", e.target.value)}
         />
       </FormGroup>

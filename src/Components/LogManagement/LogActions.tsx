@@ -27,7 +27,6 @@ export default function LogActions() {
   };
 
   const handleDeleteAction = (index: number) => {
-    console.log(actions, index);
     setActions((old) => old.filter((action, i) => i !== index));
   };
 
@@ -35,7 +34,6 @@ export default function LogActions() {
   const isActionEmpty = (action: Action) => !!action.ActionTypeId;
 
   const handleOnChanges = (index: number, field: string, value: string) => {
-    console.log(field, value);
     setActions((old) =>
       old.map((action, i) =>
         i === index ? { ...action, [field]: value } : action
@@ -43,9 +41,7 @@ export default function LogActions() {
     );
   };
 
-  const handleOnSave = () => {
-    console.log("Action to send", actions);
-  };
+  const handleOnSave = () => {};
 
   return (
     <Box
@@ -97,8 +93,6 @@ export function ActionForm(props: ActionFormProps) {
           props.onChange(props.index, e.target.name, e.target.value)
         }
       />
-      <NatureSelect />
-      <ConcerningSelect />
       <ActionSelect />
       <ActorSelect onChange={props.onChange} index={props.index} />
       <ConstraintSelect />

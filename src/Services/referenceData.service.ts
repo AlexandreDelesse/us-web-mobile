@@ -1,8 +1,8 @@
 import { api, apiWithoutBase } from "./api.service";
 
 export interface RequestAction {
-  id: number;
-  value: string;
+  Id: number;
+  Value: string;
 }
 
 export interface RequestActionWithDate extends RequestAction {

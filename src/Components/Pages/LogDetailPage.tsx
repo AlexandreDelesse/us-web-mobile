@@ -18,6 +18,7 @@ import AnalyseResumeForm from "../Analyse/AnalyseResumeForm";
 import SaveIcon from "@mui/icons-material/Save";
 import useAnalyseById from "../../Hooks/useAnalyseById";
 import { Analyse } from "../LogManagement/Analyse";
+import usePostAnalyse from "../../Hooks/usePostAnalyse";
 
 export default function LogDetailPage() {
   const { logId } = useParams();
@@ -29,26 +30,31 @@ export default function LogDetailPage() {
     AnalyzeBy: "",
     Concerning: -1,
     ImmobilizeVehicle: false,
-    LogId: -1,
+    LogId: parseInt(logId || "-1"),
     Nature: -1,
   });
 
   const analyseReq = useAnalyseById(logId);
   const logReq = useLogByLogId(logId);
+  const analysePost = usePostAnalyse(logId);
+
+  useEffect(() => {
+    if (!analyseReq.data) return;
+    setFormData(analyseReq.data);
+  }, [analyseReq.data]);
 
   const is404Error =
     analyseReq.isError &&
     axios.isAxiosError(analyseReq.error) &&
     analyseReq.error.response?.status === 404;
 
-  useEffect(() => console.log(formData), [formData]);
-  
   if (logReq.isLoading || analyseReq.isLoading) return <LogoLoader />;
   if (logReq.isError && !is404Error)
     return <ErrorHandler error={logReq.error} />;
-  console.log(analyseReq.data);
 
   const onFormDataChanges = (name: keyof Analyse, value: any) => {
+    console.log("azeazeazeza", name, value);
+
     return setFormData((old) => ({ ...old, [name]: value }));
   };
 
@@ -57,11 +63,12 @@ export default function LogDetailPage() {
   // );
   // if (!logDetail) return <div>Pas de détail pour ce Log !</div>;
 
-  const saveAnalyse = () => {};
+  const saveAnalyse = () => analysePost.mutate(formData);
+
   return (
     <Box sx={{ padding: 2, display: "flex", flexDirection: "column", gap: 2 }}>
       <LogResume log={logReq.log} />
-      <AnalyseResumeForm analyseInfos={formData} onChange={onFormDataChanges} />
+      <AnalyseResumeForm analyse={formData} onChange={onFormDataChanges} />
       <LogActions />
       <Button
         onClick={saveAnalyse}
@@ -69,6 +76,7 @@ export default function LogDetailPage() {
         startIcon={<SaveIcon />}
         variant="contained"
         color="primary"
+        disabled={analysePost.isPending}
       >
         Sauvegarder
       </Button>

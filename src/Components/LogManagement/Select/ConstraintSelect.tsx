@@ -16,16 +16,16 @@ export default function ConstraintSelect() {
   const selectedConstraint: RequestActionWithDate | undefined =
     req.data &&
     req.data.find(
-      (constraint: RequestActionWithDate) => constraint.id === parseInt(id)
+      (constraint: RequestActionWithDate) => constraint.Id === parseInt(id)
     );
 
-  useEffect(() => console.log(selectedConstraint), [selectedConstraint]);
+  // useEffect(() => console.log(selectedConstraint), [selectedConstraint]);
 
   const handleActionChanges = (id: string) => setId(id);
 
   return (
     <Box sx={{ display: "flex", gap: 1 }}>
-      <AsyncSelect label="Echéance" req={req} onChange={handleActionChanges} />
+      <AsyncSelect value={id} label="Echéance" req={req} onChange={handleActionChanges} />
       {selectedConstraint && selectedConstraint.requiresDate && <DatePicker />}
     </Box>
   );
