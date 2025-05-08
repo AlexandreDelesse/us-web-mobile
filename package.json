@@ -1,6 +1,6 @@
 {
   "name": "urgence-sante-jobs-client",
-  "version": "0.2.13",
+  "version": "0.2.14",
   "versionName": "dev",
   "private": true,
   "dependencies": {
