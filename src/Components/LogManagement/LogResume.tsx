@@ -2,14 +2,13 @@ import React, { ReactNode } from "react";
 import { Log } from "./Log";
 import { Box, TextField, Typography } from "@mui/material";
 import DateDisplayer from "../Shared/DateDisplayer";
-import { Label } from "@mui/icons-material";
-import { Analyse } from "./Analyse";
 
 interface LogResumeProps {
   log: Log;
 }
 export default function LogResume(props: LogResumeProps) {
   const { log } = props;
+  console.log(log)
 
   return (
     <Box sx={{ padding: 2, borderRadius: 2, backgroundColor: "whitesmoke" }}>
@@ -17,7 +16,7 @@ export default function LogResume(props: LogResumeProps) {
         Résumé de la déclaration
       </Typography>
       {DataPresenter("Véhicule", log.immatriculation)}
-      {DataPresenter("Date", <DateDisplayer value={log.constatDate} />)}
+      {DataPresenter("Date", <DateDisplayer value={log.logDate} />)}
       {DataPresenter("Ambulancier", "Not implemented - No Crew Model")}
       {DataPresenter("Description", log.constat)}
     </Box>

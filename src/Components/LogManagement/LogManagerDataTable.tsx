@@ -68,10 +68,10 @@ export default function LogManagerDataTable() {
   if (request.isError) return <ErrorHandler error={request.error} />;
 
   const rows = request.data.map((log: Log) => ({
-    id: log.logId,
+    id: log.id,
     immat: log.immatriculation,
-    state: log.constatState,
-    date: log.constatDate,
+    state: log.state,
+    date: log.declaredDate,
     constat: log.constat,
   }));
 

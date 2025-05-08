@@ -1,8 +1,10 @@
+import { DisplayValue } from "../Shared/DisplayValue";
+
 export interface Action {
   Id: number;
-  ActorId?: number;
-  ActionTypeId?: number;
-  ConstraintId?: number;
+  Actor?: DisplayValue;
+  ActionType?: DisplayValue;
+  Constraint?: DisplayValue;
   Rappel?: string;
   DueDate?: string;
 }

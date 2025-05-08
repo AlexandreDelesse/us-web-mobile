@@ -32,8 +32,8 @@ export default function LogManager() {
             {request.data.map((log: Log) => (
               <TableRow key={log.logId}>
                 <TableCell>{log.immatriculation}</TableCell>
-                <TableCell>{log.constatState}</TableCell>
-                <TableCell>{log.constatDate}</TableCell>
+                <TableCell>{log.state}</TableCell>
+                <TableCell>{log.logDate}</TableCell>
                 <TableCell>{log.constat}</TableCell>
               </TableRow>
             ))}

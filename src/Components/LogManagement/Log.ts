@@ -1,12 +1,19 @@
+import { Action } from "./Action";
+
 export interface Log {
-  logId: number;
-  immatriculation: string;
-  crew: any; //TODO: A modifier
-  constatDate: string;
+  id: number;
   constat: string;
-  constatState: string;
-  analyse: string; //TODO: A modifier
-  action: string; //TODO: A modifier
-  closed: boolean; //TODO: A modifier
-  nextDeadLine: string;
+  declaredDate: string;
+  lastStateDate: string;
+  state: number;
+  logId: number;
+  immatriculation: string | null;
+  crew: null;
+  logDate: string;
+  report: string | null;
+  reportState: string | null;
+  analyse: string | null;
+  action: Action[] | null;
+  nextDeadLine: string | null;
 }
+

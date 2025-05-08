@@ -31,7 +31,7 @@ export default function LogActions() {
   };
 
   const hasEmptyAction = () => actions.some((action) => isActionEmpty(action));
-  const isActionEmpty = (action: Action) => !!action.ActionTypeId;
+  const isActionEmpty = (action: Action) => !!action.ActionType;
 
   const handleOnChanges = (index: number, field: string, value: string) => {
     setActions((old) =>

@@ -1,10 +1,10 @@
 import axios from "axios";
-import { Analyse } from "../Components/LogManagement/Analyse";
 import { api, apiWithoutBase } from "./api.service";
 
 import { Log } from "../Components/LogManagement/Log";
+import { IAnalyse } from "../Components/Analyse/IAnalyse";
 
-const getAnalyseById = async (id: string | null): Promise<Analyse | Log> => {
+const getAnalyseById = async (id: string | null): Promise<IAnalyse | Log> => {
   try {
     if (!id) throw new Error("l'ID n'existe pas.");
     const req = await apiWithoutBase.get(`analyze/${id}`);
@@ -14,7 +14,7 @@ const getAnalyseById = async (id: string | null): Promise<Analyse | Log> => {
   }
 };
 
-const postAnalyse = async (analyse: Analyse) => {
+const postAnalyse = async (analyse: IAnalyse) => {
   try {
     const req = await apiWithoutBase.post(`analyze`, analyse);
     return req.data;
@@ -23,7 +23,7 @@ const postAnalyse = async (analyse: Analyse) => {
   }
 };
 
-const putAnalyze = async (analyse: Analyse) => {
+const putAnalyze = async (analyse: IAnalyse) => {
   try {
     const req = await apiWithoutBase.put(`analyze`, analyse);
     return req.data;

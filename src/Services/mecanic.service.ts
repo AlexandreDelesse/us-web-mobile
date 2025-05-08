@@ -21,7 +21,7 @@ const sendMecanicLog = async (crewId: number, constat: string) => {
 
 const getLogManager = async (): Promise<Log[]> => {
   try {
-    const request = await api.get("LogManager");
+    const request = await api.get("MecanicLog");
     return request.data;
   } catch (error) {
     throw error;

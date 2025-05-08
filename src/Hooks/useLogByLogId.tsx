@@ -6,7 +6,7 @@ export default function useLogByLogId(id: string | undefined) {
   const { data: logs, isLoading, isError, error } = useLogManager();
 
   const log = id
-    ? logs?.find((log: Log) => log.logId === parseInt(id))
+    ? logs?.find((log: Log) => log.id === parseInt(id))
     : undefined;
 
   return {

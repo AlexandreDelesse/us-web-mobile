@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { Analyse, analyseInfos } from "../LogManagement/Analyse";
 import {
   Box,
   FormControlLabel,
@@ -11,6 +10,7 @@ import {
 import { CheckBox } from "@mui/icons-material";
 import ConcerningSelect from "../LogManagement/Select/ConcerningSelect";
 import NatureSelect from "../LogManagement/Select/NatureSelect";
+import { analyseInfos, IAnalyse } from "./IAnalyse";
 
 const emptyAnalyseInfos = {
   Analyze: "",
@@ -21,11 +21,11 @@ const emptyAnalyseInfos = {
   Nature: 0,
 };
 
-interface AnalyseResumeFormProps {
-  analyse: Analyse;
-  onChange: (name: keyof Analyse, value: any) => void;
+interface AnalyseFormProps {
+  analyse: IAnalyse;
+  onChange: (name: keyof IAnalyse, value: any) => void;
 }
-export default function AnalyseResumeForm(props: AnalyseResumeFormProps) {
+export default function AnalyseForm(props: AnalyseFormProps) {
   const { analyse } = props;
 
   useEffect(() => console.log(analyse), [analyse]);

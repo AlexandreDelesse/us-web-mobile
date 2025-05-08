@@ -17,7 +17,7 @@ export interface RequestConstraint {
 
 const getReferenceActions = async () => {
   try {
-    const req = await apiWithoutBase.get("/reference/actions");
+    const req = await api.get("/ReferenceData/actions");
     return req.data as RequestAction[];
   } catch (error) {
     throw error;
@@ -26,7 +26,7 @@ const getReferenceActions = async () => {
 
 const getReferenceActors = async () => {
   try {
-    const req = await apiWithoutBase.get("/reference/actors");
+    const req = await api.get("/ReferenceData/actors");
     return req.data as RequestAction[];
   } catch (error) {
     throw error;
@@ -35,7 +35,7 @@ const getReferenceActors = async () => {
 
 const getReferenceNature = async () => {
   try {
-    const req = await apiWithoutBase.get("/reference/nature");
+    const req = await api.get("/ReferenceData/nature");
     return req.data as RequestAction[];
   } catch (error) {
     throw error;
@@ -44,7 +44,7 @@ const getReferenceNature = async () => {
 
 const getReferenceConcerning = async () => {
   try {
-    const req = await apiWithoutBase.get("/reference/concerning");
+    const req = await api.get("/ReferenceData/concerning");
     return req.data as RequestAction[];
   } catch (error) {
     throw error;
@@ -54,7 +54,7 @@ const getReferenceConcerning = async () => {
 // Pas le plus propre mais permet de réutiliser des composants
 const getReferenceConstraint = async () => {
   try {
-    const req = await apiWithoutBase.get("/reference/constraints");
+    const req = await api.get("/ReferenceData/constraints");
 
     return req.data.map((el: RequestConstraint) => ({
       ...el,
