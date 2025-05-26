@@ -14,7 +14,6 @@ export default function UserLoginViewModel() {
 
   useEffect(() => {
     let crew = getCrew();
-    console.log(crew);
     if (crew) navigate("/");
   }, [navigate]);
 
@@ -24,6 +23,7 @@ export default function UserLoginViewModel() {
 
   const submit = async () => {
     if (name === "regul" && code === "1234") return navigate("/regul");
+    if (name === "admin" && code === "4321") return navigate("/logs");
     else
       mutate({
         id: parseInt(code),

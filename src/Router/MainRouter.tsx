@@ -6,16 +6,30 @@ import JobDetail from "../Presenter/page/JobDetailNavigation/JobDetail/JobDetail
 import JobEdit from "../Presenter/page/JobDetailNavigation/JobEdit/JobEdit";
 import JobDetailNavigation from "../Presenter/page/JobDetailNavigation/JobDetailNavigation";
 import KilometersSetForm from "../Presenter/page/KilometersSetForm/KilometersSetForm";
-import PrivateRoute from "./PrivateRoute";
 import CrewListContainer from "../Components/CrewList/CrewListContainer";
 import SignatureContainer from "../Components/Signature/SignatureContainer";
+import MainPage from "../Components/Pages/MainPage";
+import MissionsPage from "../Components/Pages/MissionsPage";
+import MecanicLogs from "../Components/Mecanic/MecanicLogs";
+import VersionDisplayerView from "../Presenter/components/VersionDisplayer/VersionDisplayerView";
 
 export const appRouter = createHashRouter([
   {
     path: "/",
-    element: <PrivateRoute />,
+    element: <MainPage />,
     children: [
-      { path: "/", element: <Home /> },
+      {
+        path: "/",
+        element: <Home />,
+        children: [
+          {
+            index: true,
+            element: <MissionsPage />,
+          },
+          { path: "/vehicle", element: <MecanicLogs /> },
+        ],
+      },
+
       {
         path: "/jobs/:id/*",
         element: <JobDetailNavigation />,
@@ -31,7 +45,21 @@ export const appRouter = createHashRouter([
       { path: "regul", element: <CrewListContainer /> },
     ],
   },
-  { path: "login", element: <UserLoginView /> },
-  { path: "login/:crewId/:memberName", element: <UserLoginView /> },
+  {
+    path: "login",
+    element: (
+      <>
+        <UserLoginView /> <VersionDisplayerView cornerBottom={true} />
+      </>
+    ),
+  },
+  {
+    path: "login/:crewId/:memberName",
+    element: (
+      <>
+        <UserLoginView /> <VersionDisplayerView cornerBottom={true} />
+      </>
+    ),
+  },
   { path: "/*", element: <Page404 /> },
 ]);

@@ -1,25 +1,22 @@
-import { Box } from "@mui/system";
 import { useEffect } from "react";
-import { Outlet, useLocation, useNavigate } from "react-router-dom";
+import { matchPath, Outlet, useLocation, useNavigate } from "react-router-dom";
 import { getCrew } from "../DataSource/localStorage";
-import MainNavbarFacade from "../Presenter/components/MainNavbar/MainNavbarFacade";
 
 export default function PrivateRoute() {
   const navigate = useNavigate();
   const location = useLocation();
 
+  const acceptedPaths = ["/regul", "/logs", "logs/:logId"];
+  // const isPublicPath = acceptedPaths.some((el) => el == location.pathname);
+  const isPublicPath = acceptedPaths.some((path) =>
+    matchPath({ path, end: false }, location.pathname)
+  );
+
   useEffect(() => {
-    if (location.pathname === "/regul") return;
+    if (isPublicPath) return;
     const crew = getCrew();
     if (!crew) navigate("/login", { replace: true });
-  }, [navigate, location.pathname]);
+  }, [navigate, location.pathname, isPublicPath]);
 
-  return (
-    <>
-      <MainNavbarFacade />
-      <Box sx={{ padding: "16px" }}>
-        <Outlet />
-      </Box>
-    </>
-  );
+  return <Outlet />;
 }

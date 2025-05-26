@@ -11,6 +11,7 @@ export default function GetDriverUseCase(): UseCase<DriverSwapQuery, any> {
       const response = await apiGetDriver(crew.crewId);
       return response;
     } catch (error) {
+      console.log(error);
       throw error;
     }
   };

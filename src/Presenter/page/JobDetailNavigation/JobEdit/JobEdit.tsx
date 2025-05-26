@@ -24,7 +24,7 @@ export default function JobEdit() {
   if (error) return <ErrorHandler error={error} />
 
   return (
-    <Box sx={{ marginBottom: 7 }}>
+    <Box sx={{ marginBottom: 7}}>
       {fields
         .sort((a, b) => a.index - b.index)
         .map((field: FieldInfos) => (

@@ -1,29 +1,28 @@
-import axios, { AxiosInstance } from "axios";
-import { DriverSwapQuery } from "../../../Domain/Queries/DriverSwapQuery";
+import { AxiosInstance } from 'axios'
 
 interface kmApiGetResponse {
-  km: number;
+  km: number
 }
 
 export class KilometersRoute {
-  private baseApi: AxiosInstance;
-  private path: string = "Driver";
+  private baseApi: AxiosInstance
+  // private path: string = "Driver";
 
   constructor(axiosInstance: AxiosInstance) {
-    this.baseApi = axiosInstance;
+    this.baseApi = axiosInstance
   }
 
   async get(crewId: number | undefined): Promise<kmApiGetResponse> {
-    const axiosResponse = await this.baseApi.get(`Kilometers/${crewId}`);
-    return axiosResponse.data;
+    const axiosResponse = await this.baseApi.get(`Kilometers/${crewId}`)
+    return axiosResponse.data
   }
 
   async post(crewId: number, kilometers: number) {
     const axiosResponse = await this.baseApi.post(
       `Kilometers/${crewId}`,
       kilometers,
-      { headers: { "Content-Type": "application/json" } }
-    );
-    return axiosResponse.data;
+      { headers: { 'Content-Type': 'application/json' } },
+    )
+    return axiosResponse.data
   }
 }

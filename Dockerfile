@@ -3,21 +3,23 @@ FROM node:19.3 AS build
 
 WORKDIR /app
 
-# Copier package.json et package-lock.json pour installer les dépendances
-COPY package*.json ./
+# Argument pour choisir l'environnement (par ex: .env.dev)
+ARG ENV_FILE
 
-# Nettoyer le cache npm et installer les dépendances
+# Copier les fichiers de dépendances
+COPY package*.json ./
 RUN npm install
 
-# Copier le code source de l'application
+# Copier le reste du code
 COPY . .
 
-ENV REACT_APP_API_PORT=8075
+# Copier le bon fichier d'environnement (ex: .env.dev → .env)
+COPY ${ENV_FILE} .env
 
-# Construire l'application React
+# Build React avec l'environnement chargé
 RUN npm run build
 
-# Étape 2 : Utiliser Nginx pour servir l'application React
+# Étape 2 : Image de production avec Nginx
 FROM nginx:stable-alpine
 
 COPY --from=build /app/build /usr/share/nginx/html

@@ -6,19 +6,10 @@ import { LoginRoute } from "./Routes/LoginRoute";
 import { KilometersRoute } from "./Routes/KilometersRoute";
 import { SignatureRoute } from "./Routes/SignatureRoute";
 import { JoblistRoute } from "./Routes/JoblistRoute";
-
-const HOST =
-  process.env.REACT_APP_API_URL || "https://intranet.urgencesante.fr";
-const PORT = process.env.REACT_APP_API_PORT || 8090;
-const BASE_ROUTE = process.env.REACT_APP_API_BASE_ROTUE || "/api/";
-
-const BASE_URL = `${HOST}:${PORT}${BASE_ROUTE}`;
+import { api } from "../../Services/api.service";
 
 export class WebApi {
-  private baseApi: AxiosInstance = axios.create({
-    baseURL: BASE_URL,
-    timeout: 1000,
-  });
+  private baseApi: AxiosInstance = api;
 
   login = new LoginRoute(this.baseApi);
   driver = new DriverRoute(this.baseApi);

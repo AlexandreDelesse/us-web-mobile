@@ -32,7 +32,7 @@ export default function JobList() {
   //TODO: Créer un composant InstructionsList
 
   return (
-    <div>
+    <Box sx={{ flex: 1, overflowY: "auto" }}>
       {instructions.map((instruction) => (
         <Alert
           action={
@@ -51,13 +51,15 @@ export default function JobList() {
       {jobList.length < 1 && (
         <Box sx={{ textAlign: "center", padding: 5 }}>{emptyListMessage}</Box>
       )}
-      {jobList.map((shortJob: ShortJob) => (
-        <JobListItemView
-          key={shortJob.jobId}
-          shortJob={shortJob}
-          onClickOnItem={onClickOnItem}
-        />
-      ))}
-    </div>
+      <Box>
+        {jobList.map((shortJob: ShortJob) => (
+          <JobListItemView
+            key={shortJob.jobId}
+            shortJob={shortJob}
+            onClickOnItem={onClickOnItem}
+          />
+        ))}
+      </Box>
+    </Box>
   );
 }

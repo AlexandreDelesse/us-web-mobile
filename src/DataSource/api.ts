@@ -1,4 +1,4 @@
-import axios, { AxiosError } from "axios";
+import axios from "axios";
 import { LoginCmd } from "../UseCase/LoginUseCase/LoginCmd";
 import { Crew } from "../Domain/Crew";
 import { AckJobCmd } from "../UseCase/AckJobUseCase/AckJobCmd";
@@ -7,18 +7,7 @@ import { FieldInfos } from "../Domain/FormStructure";
 import { DriverSwapQuery } from "../Domain/Queries/DriverSwapQuery";
 import { Signature } from "../Domain/Signature";
 import { WebApi } from "./WebApi/WebApi";
-
-const HOST =
-  process.env.REACT_APP_API_URL || "https://intranet.urgencesante.fr";
-const PORT = process.env.REACT_APP_API_PORT || 8090;
-const BASE_ROUTE = process.env.REACT_APP_API_BASE_ROTUE || "/api/";
-
-const BASE_URL = `${HOST}:${PORT}${BASE_ROUTE}`;
-
-const api = axios.create({
-  baseURL: BASE_URL,
-  timeout: 1000,
-});
+import { api } from "../Services/api.service";
 
 const apiPostLogin = async (credentials: LoginCmd): Promise<Crew> => {
   credentials.vehicle = "";
@@ -71,6 +60,7 @@ const apiGetDriver = async (crewId: number): Promise<DriverSwapQuery> => {
 
 const apiPostDriver = async (crewId: string, driverId: string) => {
   const axiosResponse = await api.post(`Driver/${crewId}`, driverId);
+  return axiosResponse.data;
 };
 
 const webApi = new WebApi();
