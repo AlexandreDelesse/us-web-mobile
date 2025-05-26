@@ -11,8 +11,6 @@ import SignatureContainer from "../Components/Signature/SignatureContainer";
 import MainPage from "../Components/Pages/MainPage";
 import MissionsPage from "../Components/Pages/MissionsPage";
 import MecanicLogs from "../Components/Mecanic/MecanicLogs";
-import LogManagerPage from "../Components/Pages/LogManagerPage";
-import LogDetailPage from "../Components/Pages/LogDetailPage";
 import VersionDisplayerView from "../Presenter/components/VersionDisplayer/VersionDisplayerView";
 
 export const appRouter = createHashRouter([
@@ -45,11 +43,6 @@ export const appRouter = createHashRouter([
 
       { path: "kilometers", element: <KilometersSetForm /> },
       { path: "regul", element: <CrewListContainer /> },
-      {
-        path: "logs",
-        element: <LogManagerPage />,
-      },
-      { path: "logs/:logId", element: <LogDetailPage /> },
     ],
   },
   {
