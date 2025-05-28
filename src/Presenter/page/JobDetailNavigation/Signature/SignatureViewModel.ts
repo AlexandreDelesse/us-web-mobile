@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom";
 import ReactSignatureCanvas from "react-signature-canvas";
 import { apiGetSignature, webApi } from "../../../../DataSource/api";
 import { AxiosError } from "axios";
+import { useQueryClient } from "@tanstack/react-query";
 
 export default function SignatureViewModel() {
   const { id } = useParams();
@@ -14,6 +15,8 @@ export default function SignatureViewModel() {
   const [isLoading, setIsloading] = useState(false);
   const [error, setError] = useState<Error | AxiosError | null>(null);
   const [refresh, setRefresh] = useState(false);
+
+  const queryClient = useQueryClient();
 
   const getDisplayDateAndTime = (
     isoDate: string
@@ -59,6 +62,7 @@ export default function SignatureViewModel() {
         signature: { data: imgDataUrl, dateTime: isoDate },
       });
       setRefresh(!refresh);
+      queryClient.invalidateQueries({ queryKey: ["signature", id] });
     } catch (error) {}
   };
 

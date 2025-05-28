@@ -1,6 +1,4 @@
 export interface AckJobCmd {
-  jobId: string;
-  instructionId?: string;
-  acknowledged: boolean;
-  isJob?: boolean;
+  JobId: string;
+  IsJob?: boolean;
 }

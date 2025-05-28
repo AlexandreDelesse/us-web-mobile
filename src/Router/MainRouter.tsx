@@ -12,6 +12,7 @@ import MainPage from "../Components/Pages/MainPage";
 import MissionsPage from "../Components/Pages/MissionsPage";
 import MecanicLogs from "../Components/Mecanic/MecanicLogs";
 import VersionDisplayerView from "../Presenter/components/VersionDisplayer/VersionDisplayerView";
+import Signature from "../Components/Signature/Signature";
 
 export const appRouter = createHashRouter([
   {
@@ -37,7 +38,7 @@ export const appRouter = createHashRouter([
           { index: true, element: <Navigate to={"detail"} replace /> },
           { path: "detail", element: <JobDetail /> },
           { path: "detailEditable", element: <JobEdit /> },
-          { path: "signature", element: <SignatureContainer /> },
+          { path: "signature", element: <Signature /> },
         ],
       },
 

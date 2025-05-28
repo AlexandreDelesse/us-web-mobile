@@ -3,12 +3,12 @@ import {
   SignaturePresenter,
   SignatureViewDTO,
 } from "../../Presenters/SignaturePresenter";
-import { AxiosError } from "axios";
+import { AxiosError, isAxiosError } from "axios";
 import { useParams } from "react-router-dom";
 import SignatureView from "./SignatureView";
 import SignatureFormView from "./SignatureFormView";
 import ReactSignatureCanvas from "react-signature-canvas";
-import ErrorHandler from "../../Presenter/components/ErrorHandler/ErrorHandler";
+import ErrorHandler from "../Shared/Error/ErrorHandler";
 
 export default function SignatureContainer() {
   const [signature, setSignature] = useState<SignatureViewDTO | null>(null);
@@ -48,7 +48,21 @@ export default function SignatureContainer() {
 
   if (isLoading) return <div>Loading..</div>;
 
-  if (error) return <ErrorHandler error={error} />;
+  if (error)
+    return (
+      <ErrorHandler
+        custom404Render={
+          <SignatureFormView
+            signRef={signRef}
+            disableButtons={isEmpty}
+            onClear={onClear}
+            onSave={onSave}
+            onEnd={onEnd}
+          />
+        }
+        error={error}
+      />
+    );
 
   if (!signature)
     return (

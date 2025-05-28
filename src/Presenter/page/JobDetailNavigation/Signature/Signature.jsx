@@ -7,8 +7,9 @@ import {
 import ReactSignatureCanvas from "react-signature-canvas";
 import { Button, Card } from "@mui/material";
 import "./signature.css";
-import AsyncDataComponent from "../../../../components/shared/AsyncDataComponent";
+
 import { useParams } from "react-router";
+import AsyncComponent from "../../../../Components/Shared/AsyncComponent";
 
 export default function Signature() {
   const params = useParams();
@@ -38,16 +39,15 @@ export default function Signature() {
 
   return (
     <>
-      <AsyncDataComponent
-        withRefetchLoader
+      <AsyncComponent
         query={signatureQuery}
-        onSuccess={({ data }) => (
+        render={({ data }) => (
           <Card
             sx={{ backgroundImage: `url(${data.data})` }}
             className="mt-3 imgContainer"
           />
         )}
-        onError={() => (
+        render404={() => (
           <>
             <Card className="cardCanvas">
               <ReactSignatureCanvas

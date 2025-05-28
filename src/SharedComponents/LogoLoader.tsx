@@ -1,6 +1,6 @@
 import { Box } from '@mui/material'
 import logoLoader from "../Assets/Images/logo-loader.gif"
-import React from 'react'
+
 
 export default function LogoLoader() {
   return (
