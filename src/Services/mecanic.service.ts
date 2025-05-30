@@ -11,7 +11,7 @@ const getMecanicLogsByCrewId = async (crewId: number) => {
 
 const sendMecanicLog = async (crewId: number, constat: string) => {
   try {
-    const request = await api.put("MecanicLog", { crewId, constat });
+    const request = await api.post("MecanicLog", { crewId, constat });
     return request.data;
   } catch (error) {
     throw error;

@@ -13,6 +13,7 @@ export default function DriverSwapView() {
     isPending,
     isUpdateError,
     updateError,
+    vehicleModel,
   } = DriverSwapViewModel();
 
   if (isError || isUpdateError)
@@ -45,7 +46,7 @@ export default function DriverSwapView() {
       startIcon={<TbSteeringWheel size={20} />}
       fullWidth
     >
-      {selectedDriver.driverName}
+      {vehicleModel?.immatriculation || ""} | {selectedDriver.driverName}
     </Button>
   );
 }

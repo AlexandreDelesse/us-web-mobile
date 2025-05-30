@@ -7,6 +7,7 @@ import LogoLoader from "../../SharedComponents/LogoLoader";
 import SignatureView from "./SignatureView";
 import SignatureFormView from "./SignatureFormView";
 import SignatureForm from "./SignatureForm";
+import axios from "axios";
 
 export default function Signature() {
   const { id } = useParams();
@@ -14,11 +15,18 @@ export default function Signature() {
   const query = useQuery({
     queryKey: ["signature", id],
     queryFn: () => getSignature(id!),
+    retry: (failureCount, error) => {
+      if (axios.isAxiosError(error) && error.response?.status === 404) {
+        return false;
+      }
+      return failureCount < 2;
+    },
   });
 
   return (
     <AsyncComponent
       query={query}
+      renderLoading={<LogoLoader />}
       render404={<SignatureForm />}
       render={(signature) => <SignatureView signature={signature} />}
     />

@@ -17,7 +17,7 @@ export default function JobEdit() {
     isPending,
   } = JobEditViewModel();
 
-  if (isLoading || isRefetching) return <LogoLoader />;
+  if (isLoading || isRefetching || isPending) return <LogoLoader />;
 
   if (!data) return <div>No data yet</div>;
 

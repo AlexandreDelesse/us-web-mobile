@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import GetDriverUseCase from "../../../../UseCase/GetDriverUseCase/GetDriverUseCase";
 import { Driver } from "../../../../Domain/Driver";
 import UpdateDriverUseCase from "../../../../UseCase/UpdateDriverUseCase/UpdateDriverUseCase";
+import { Vehicle } from "../../../../Domain/Vehicle";
 
 export default function DriverSwapViewModel() {
   const queryClient = useQueryClient();
@@ -12,6 +13,7 @@ export default function DriverSwapViewModel() {
 
   const [driverCollection, setDriverCollection] = useState<Driver[]>([]);
   const [selectedDriver, setSelectedDriver] = useState<Driver | null>();
+  const [vehicleModel, setVehicleModel] = useState<Vehicle | null>(null);
 
   const { data, isLoading, error, isError } = useQuery({
     queryKey: ["driverSwap"],
@@ -35,6 +37,7 @@ export default function DriverSwapViewModel() {
     else {
       setSelectedDriver(data.selectedDriver);
       setDriverCollection(data.driversCollection);
+      setVehicleModel(data.vehicleModel);
     }
   }, [data]);
 
@@ -70,5 +73,6 @@ export default function DriverSwapViewModel() {
     isPending,
     updateError,
     isUpdateError,
+    vehicleModel,
   };
 }

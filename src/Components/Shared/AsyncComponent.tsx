@@ -14,8 +14,8 @@ interface AsyncComponentProps {
 export default function AsyncComponent(props: AsyncComponentProps) {
   const { query, render, render404 } = props;
 
-  if (query.isLoading || query.isPending) return <>Loading...</>
-    // return <>{props.renderLoading}</> || <LogoLoader />;
+  if (query.isLoading || query.isPending)
+    return <>{props.renderLoading}</> || <LogoLoader />;
 
   if (query.error)
     return <ErrorHandler custom404Render={render404} error={query.error} />;

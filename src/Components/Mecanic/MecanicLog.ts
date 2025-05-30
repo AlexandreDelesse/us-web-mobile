@@ -1,6 +1,7 @@
 export interface MecanicLog {
-  id: number;
-  constat: string;
+  logId: number;
+  report: string;
+  reportState: string;
   declaredDate: string;
   lastStateDate: string;
   state: number;
