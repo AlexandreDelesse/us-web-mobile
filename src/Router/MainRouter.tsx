@@ -13,6 +13,7 @@ import MissionsPage from "../Components/Pages/MissionsPage";
 import MecanicLogs from "../Components/Mecanic/MecanicLogs";
 import VersionDisplayerView from "../Presenter/components/VersionDisplayer/VersionDisplayerView";
 import Signature from "../Components/Signature/Signature";
+import WelcomePage from "../Components/Pages/WelcomePage";
 
 export const appRouter = createHashRouter([
   {
@@ -62,5 +63,6 @@ export const appRouter = createHashRouter([
       </>
     ),
   },
+  { path: "/welcome", element: <WelcomePage /> },
   { path: "/*", element: <Page404 /> },
 ]);
